@@ -82,7 +82,7 @@ Who sees what in SF....!!!!!!!!!
   third way is to implement using apex. And another option is to use Teams where u can do account bases sharing, for diff diff customer diff rules likewise.
   Role Hierarch,(Grant access using hierarchy) if the option grant access is true then data will be shared in hierarchy. (your boss can see your records).
   sharing records using Apex:
-  <a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_bulk_sharing_creating_with_apex.html">Sharing using apex</a>
+  <a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_bulk_sharing_creating_with_apex.htm">Sharing using apex</a>
   
   ##### difference betn Profile and Role: 
   profiles are not in hierarchy while roles are in hierarchy. Profile is mandatory while role is not.
