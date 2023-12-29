@@ -13,7 +13,7 @@ Who sees what in SF....!!!!!!!!!
   
   3.Login hrs (u can set the hrs: example user/admin can only login within hrs)
 
-  **Types of securities:**
+  ### **Types of securities:**
   
   1.Object level (Accessability) Based on CRED settings how can u access the Table (In term of DB)
   
@@ -31,7 +31,8 @@ Who sees what in SF....!!!!!!!!!
   the second step is to open up the access on record level. how to open up the access, there are ways by using sharing rules (criteria based and owner 
   based),Manual sharing, Apex sharing (dynamic sharing), by using Teams. thease are comman ways to open up the access on record level. FLS (field level security)   can be implemented on profile level or can be on field also.
 
-  **Explanation of Object level Security:**
+  ### **Object level Security:**
+  <hr>
 
   It can be implemented using profiles and permission sets. when u have multiple users and in db's table they need different diff access in term of CRED (crete, 
   read,edit, delete). so for the users you can have unique profile, profile is set of access priviledge and settings given to the user. Every user has profile
@@ -44,7 +45,36 @@ Who sees what in SF....!!!!!!!!!
   now the solution is either use profile p3 but that is not good solution, providing it to existing profile will open up cred permissions to all the users but
   that's also not desirable. So permission set can be used to give addtional access. basic access can be provided by profile and now permission set will provide
   addtional access to the user.fls can be handled through profiles and permission sets. Dont clone syatem admin profile to create new profile. Objects permissions
-  are not editable on sys admin profile.
+  are not editable on sys admin profile.So conclusion is the basic access of user came from profile and addtional access is given by permission set. Total access 
+  to the user is nothing but profile+Permission sets.
+
+  Interview Questions:
+
+  1.Profile vs Permission sets??
+  
+  2.profiles vs Role???
+  
+  3.Types of Salesforce security?
+  
+  4.precedence of securities??
+
+  5.significance of profile, permission set, owd, sharing setting.
+
+  6.Difference between sharing rules vs manual sharing. (In sharing rule ,one rule can applied to manay records)
+
+  **These are some comman questions were asked in interviews:** (Covered in next topics)
+
+
+  ### Record Level Security:
+  <hr>
+
+  Record level security is all about visibility. visibility of table or records we can say. We implement it in two step process. first is to locking up the access
+  and second one is to open it up. owd is the first step to lock the access (default access). {accesses: ["public read/write trasfer", "public read/write default 
+  setting)","public read only" ,"private" ] }. private is most restrictive one. To open up the access we have sharing rules, if owd has locked up the records
+
+
+ 
+  
   
   
   
