@@ -81,9 +81,11 @@ Who sees what in SF....!!!!!!!!!
   to go by record by record and if the object's owd is private then above the record u will get option of manual share. So Individually u can add sharing. the 
   third way is to implement using apex. And another option is to use Teams where u can do account bases sharing, for diff diff customer diff rules likewise.
   Role Hierarch,(Grant access using hierarchy) if the option grant access is true then data will be shared in hierarchy. (your boss can see your records).
-
-  difference betn Profile and Role: 
+  sharing records using Apex:
+  <a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_bulk_sharing_creating_with_apex.html">Sharing using apex</a>
   
+  ##### difference betn Profile and Role: 
+  profiles are not in hierarchy while roles are in hierarchy. Profile is mandatory while role is not.
   
   
   
