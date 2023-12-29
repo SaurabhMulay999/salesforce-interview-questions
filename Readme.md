@@ -70,8 +70,18 @@ Who sees what in SF....!!!!!!!!!
 
   Record level security is all about visibility. visibility of table or records we can say. We implement it in two step process. first is to locking up the access
   and second one is to open it up. owd is the first step to lock the access (default access). {accesses: ["public read/write trasfer", "public read/write default 
-  setting)","public read only" ,"private" ] }. private is most restrictive one. To open up the access we have sharing rules, if owd has locked up the records
+  setting)","public read only" ,"private" ] }. private is most restrictive one."Controlled by parent" access is nothing but the child which id m-d with parent 
+  that child is owned by parent only, child is not owned by anyone then. To open up the access we have sharing rules. sharing rules are  automated exceptions to  
+  the owd for the specific group of users so they can get the records that they don't own or not see. We have criteria based sharing rule and owner base sharing
+  rules.
 
+  Criteria based: rules shared records based on some criteria, like Type=='Customer' then read access to set of users likewise.
+
+  Owner based: rules are shsring records based on owners.. ((role1..users))----> ((role2..users)) so we are just sharing records which are visible to role 1 to
+  role2. that is owner based sharing rules and at same time we can provide the level of access to the records.
+  
+  
+  
 
  
   
