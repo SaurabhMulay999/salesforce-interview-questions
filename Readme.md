@@ -39,7 +39,14 @@ Who sees what in SF....!!!!!!!!!
   many rel). System admin is the profile with all accesses. User: license is not consumed on creation of profile but consumed on creation of users associated 
   with that profile. free dev org has only 5mb space. business's need more so option is to buy the license to have more users and space. Most of MNC's used 
   unlimited version. per users may be costs 300$. feature licens also available with salesforce. Features can be accessable but need to buy it, suppose you need
-  sales cloud, service cloud, marketing cloud. those features are need to buy.   
+  sales cloud, service cloud, marketing cloud. those features are need to buy.
+  But the issue is onward they have faced...suppose profile p1 have CR access and profile p2 has CRE access but now for temporary purpose they need CRED access
+  now the solution is either use profile p3 but that is not good solution, providing it to existing profile will open up cred permissions to all the users but
+  that's also not desirable. So permission set can be used to give addtional access. basic access can be provided by profile and now permission set will provide
+  addtional access to the user.fls can be handled through profiles and permission sets. Dont clone syatem admin profile to create new profile. Objects permissions
+  are not editable on sys admin profile.
+  
+  
   
   
   
