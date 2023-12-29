@@ -71,14 +71,19 @@ Who sees what in SF....!!!!!!!!!
   Record level security is all about visibility. visibility of table or records we can say. We implement it in two step process. first is to locking up the access
   and second one is to open it up. owd is the first step to lock the access (default access). {accesses: ["public read/write trasfer", "public read/write default 
   setting)","public read only" ,"private" ] }. private is most restrictive one."Controlled by parent" access is nothing but the child which id m-d with parent 
-  that child is owned by parent only, child is not owned by anyone then. To open up the access we have sharing rules. sharing rules are  automated exceptions to  
-  the owd for the specific group of users so they can get the records that they don't own or not see. We have criteria based sharing rule and owner base sharing
+  that child is owned by parent only, child is not owned by anyone then. To open up the access we have sharing rules. sharing rules are  automated exceptions to  the owd for the specific group of users so they can get the records that they don't own or not see. We have criteria based sharing rule and owner base sharing
   rules.
 
   Criteria based: rules shared records based on some criteria, like Type=='Customer' then read access to set of users likewise.
 
   Owner based: rules are shsring records based on owners.. ((role1..users))----> ((role2..users)) so we are just sharing records which are visible to role 1 to
-  role2. that is owner based sharing rules and at same time we can provide the level of access to the records.
+  role2. that is owner based sharing rules and at same time we can provide the level of access to the records. we can do it for multiple records. but if u want 
+  to go by record by record and if the object's owd is private then above the record u will get option of manual share. So Individually u can add sharing. the 
+  third way is to implement using apex. And another option is to use Teams where u can do account bases sharing, for diff diff customer diff rules likewise.
+  Role Hierarch,(Grant access using hierarchy) if the option grant access is true then data will be shared in hierarchy. (your boss can see your records).
+
+  difference betn Profile and Role: 
+  
   
   
   
