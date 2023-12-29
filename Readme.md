@@ -85,7 +85,15 @@ Who sees what in SF....!!!!!!!!!
   <a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_bulk_sharing_creating_with_apex.htm">Sharing using apex</a>
   
   ##### difference betn Profile and Role: 
-  profiles are not in hierarchy while roles are in hierarchy. Profile is mandatory while role is not.
+  profiles are not in hierarchy while roles are in hierarchy. Profile is mandatory while role is not. checkout the other differences as well.
+
+  ** Notes:** 
+  
+  1.when changing the objects owd to private, the salesforce initiate the internal process and it will create a object OBJECT__sharing and then it'll set
+  owd to private. 
+  2. profile is responsible to accessability of record while role is responsible for visibility of record.
+  3.
+  
   
   
   
