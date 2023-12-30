@@ -80,7 +80,7 @@ Who sees what in SF....!!!!!!!!!
   role2. that is owner based sharing rules and at same time we can provide the level of access to the records. we can do it for multiple records. but if u want 
   to go by record by record and if the object's owd is private then above the record u will get option of manual share. So Individually u can add sharing. the 
   third way is to implement using apex. And another option is to use Teams where u can do account bases sharing, for diff diff customer diff rules likewise.
-  Role Hierarch,(Grant access using hierarchy) if the option grant access is true then data will be shared in hierarchy. (your boss can see your records).
+  Role Hierarch,(Grant access using hierarchy:option available in OWD settings) if the option grant access is true then data will be shared in hierarchy. (your boss can see your records).
   sharing records using Apex:
   <a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_bulk_sharing_creating_with_apex.htm">Sharing using apex</a>
   
@@ -92,14 +92,36 @@ Who sees what in SF....!!!!!!!!!
   1.when changing the objects owd to private, the salesforce initiate the internal process and it will create a object OBJECT__sharing and then it'll set
   owd to private. 
   2. profile is responsible to accessability of record while role is responsible for visibility of record.
-  3.
+  3.permissions sets aint affect visibility. 
   
   
-  
+  ### SoQL 
+  <hr>
+
+  possible scenarios and queries:
+
+  Parent to child query: (Subquery) 
+  Account-parent contact-child
+
+  **Example:**
+  Select Id, Name, (select id, fname, lname from Contacts) From Account where Id=''
   
 
- 
+  Child to parent Query: (Every child has the ref var to the parent)
+
+  **Example:**
+   Select Id,Fname, Lname, Email, Account.Id, Account.Name from Contact where AccountId=''
   
+   #### Scenarios:
+  1.Getting all Accounts that has 0 contacts associated with it
+   ```
+   Select Id, Name from Account where Id Not In (Select AccountId from Contact)
+   ```
+  2. Get kth opportunity Record that has max Amount. (Assume k given)
+  ````
+  Select Id, Name, Amount From Opportunity Order by Amount DESC LIMIT 1 OFFSET k
+  ````
+  3.
   
   
   
