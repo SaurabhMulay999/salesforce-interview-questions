@@ -121,10 +121,48 @@ Who sees what in SF....!!!!!!!!!
   ````
   Select Id, Name, Amount From Opportunity Order by Amount DESC LIMIT 1 OFFSET k
   ````
-  3.
-  
-  
-  
+  3.Example with TypeOf and When/Then clause.
+  ```
+   SELECT 
+    TYPEOF What
+        WHEN Account THEN Phone
+        ELSE Name
+    END
+  FROM Event WHERE CreatedById IN ( SELECT CreatedById FROM Case )
+
+1.TYPEOF isn’t allowed in queries that don’t return objects, such as COUNT() .
+
+2.TYPEOF expressions can’t be nested. For example, you can’t use TYPEOF inside the WHEN clause of another TYPEOF expression.
+
+3.TYPEOF isn’t allowed in the SELECT clause of a semi-join query (semi join queries are where we use IN, NOT in operator). You can use TYPEOF in the SELECT clause of an outer query that contains semi-join queries (In the above example we have used it in outer select). The 6.following example is not valid because TYPEOF is used in the semi-join query:
+
+  ```
+4. GROUP by ROllUP:
+    
+   ```` 
+   SELECT LeadSource, COUNT(Name) cnt FROM Lead GROUP BY ROLLUP(LeadSource)
+
+   Returned Aggregated results include an extra row with a null value for LeadSource that gives a grand total for all the groupings. Since there is only one 
+   rollup field, there are no other subtotals.
+
+   `````
+5.Filtering soql queries With SECURITY_ENFORCED (Must asked Interview Question)
+```
+ [Saleforce docs said] Use the WITH SECURITY_ENFORCED clause to enable field- and object-level security permissions checking for SOQL SELECT queries in Apex code, including subqueries and cross-object relationships.
+Apex generally runs in system context; that is, the current user's permissions and field-level security aren’t taken into account during code execution. Sharing rules, however, are not always bypassed: the class must be declared with the without sharing keyword in order to ensure that sharing rules are not enforced.
+
+List<Account> act1 = [SELECT Id, (SELECT LastName FROM Contacts)
+   FROM Account WHERE Name like 'Acme' WITH SECURITY_ENFORCED]
+if the user has field access for LastName, this query returns Id and LastName for the Acme account entry.
+
+List<Account> act1 = [SELECT Id, (SELECT LastName FROM Contacts), 
+   (SELECT Description FROM Opportunities)
+   FROM Account WITH SECURITY_ENFORCED]
+
+If field access for either LastName or Description is hidden, this query throws an exception indicating insufficient permissions.
+```
+
+ 
   
   
   
