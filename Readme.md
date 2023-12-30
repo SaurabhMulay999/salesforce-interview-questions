@@ -139,13 +139,13 @@ Who sees what in SF....!!!!!!!!!
   ```
 4. GROUP by ROllUP:
     
-   ```` 
-   SELECT LeadSource, COUNT(Name) cnt FROM Lead GROUP BY ROLLUP(LeadSource)
+```` 
+SELECT LeadSource, COUNT(Name) cnt FROM Lead GROUP BY ROLLUP(LeadSource)
 
-   Returned Aggregated results include an extra row with a null value for LeadSource that gives a grand total for all the groupings. Since there is only one 
-   rollup field, there are no other subtotals.
+Returned Aggregated results include an extra row with a null value for LeadSource that gives a grand total for all the groupings. Since there is only one 
+rollup field, there are no other subtotals.
 
-   `````
+`````
 5.Filtering soql queries With SECURITY_ENFORCED (Must asked Interview Question)
 ```
  [Saleforce docs said] Use the WITH SECURITY_ENFORCED clause to enable field- and object-level security permissions checking for SOQL SELECT queries in Apex code, including subqueries and cross-object relationships.
