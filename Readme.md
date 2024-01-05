@@ -162,7 +162,178 @@ List<Account> act1 = [SELECT Id, (SELECT LastName FROM Contacts),
 If field access for either LastName or Description is hidden, this query throws an exception indicating insufficient permissions.
 ```
 
- 
+### lightning web components
+<hr>
+Prerequisite: Javascript (If ain't have learnt yet,Fuck off!!)
+
+Decorators:
+
+**Public properties**:: 
+The public properties are decorated using @api and they are also reactive, when the value of property changes it results redering component and invoking rendercallback() hook. Though they are reactive but Js playes very important role here,
+
+consider below scenarios::
+```
+'===' operator in js compare data types as well as the values, it also called strict equality operator.
+
+'1'==='1' ==>true
+'str'===new String('str') ===>false (becuase string!=Object //type mismatch)
+
+In case of primitives it's okay...that new values has been assigned with same type ,
+now just render the component.
+But about non primitive data types like objects, arrays:
+
+const obj1={x:10};
+const obj2={x:10};
+
+obj1===obj2 ===>false.  (Why, they hold different ref in the memory space and data type is same but still it has no mactch)
+if u try to assign the referance;
+
+const obj3=obj1;
+obj1===obj3 ===> true.
+```
+
+and there lwc fucked up!!! reactive properties ain't reactive in case of the objects , arrays, custom data structures.
+as per their docs they suggested: [[When manipulating complex types like objects and arrays, you must create a new object and assign it to the field for the change to be detected.]] and that is kind of bad idea.
+
+So maybe they have accepted the mistake and come up with @track decorators. which tracks the mutations in the objects so maybe that's why @track...becuase it
+tracks the changes.
+[[docs: However, the framework doesn't observe mutations made to complex objects, such as objects inheriting from Object, class instances, Date, Set, or Map.]]
+
+Note when u'r using @track for objects:
+
+If a object's property contains an object, to track changes on the object's properties, annotate the property with @track. 
+
+example:
+```
+@track const obj={
+ @track prop:{
+  X:10;
+ }
+}
+```
+
+Note while using @track :; dding a new property to obj or a change doesn’t trigger a rerendering.
+
+example:
+
+it's just js habits to declare he variables with var and let but in classes you don't have to do that.
+````
+@track const obj={val1:"saurabh"}
+obj.val1="sarah" //will trigger the rendering
+
+but:
+obj.val2="saurabh" //won't be triggering the rendering
+
+````
+
+so again they fucked up over here, Likw kindoff forgot to handle the edge cases so they have suggested as per the docs:
+[[To rerender your component when adding a new property, assign the object to a new object with both values.]]
+
+like:
+```
+@track obj={val1:"saurabh"}
+
+obj={
+...obj,
+val2:'sarah'
+}
+
+now this will render the component: 
+
+```
+But story of @track ain't over...They again fuked up with reactivity, LWC won;t able to track reactivity of complex objects:
+
+1.Date ::  lwc won't able to track changes in date obj.
+so they again suggested in the case of dates:
+
+reassign he new date to that reactive property to make it reactive...
+```
+like below code they have cloned the date , modified it and assiged it back to reactive property
+updateDate() {
+  const cloned = new Date(this.x.getTime());
+  cloned.setHours(7);
+
+  // Assign the new date instance to rerender the component.
+  this.x = cloned;
+}
+
+```
+ Now that's all...enough on @api and @track.
+
+ #### Shadow DOM:
+
+Shadow DOM is a standard that encapsulates the internal document object model (DOM) structure of a web component. Encapsulating the DOM gives developers the ability to share a component and protect the component from being manipulated by arbitrary HTML, CSS, and JavaScript. The internal DOM structure is called the shadow tree. The shadow tree affects how you work with CSS, events, and the DOM.
+
+Since not all browsers implement Shadow DOM, LWC uses a synthetic shadow polyfill for Lightning Experience and Experience Cloud. A polyfill is code that allows a feature to work in a web browser.Shadow DOM allows hidden DOM trees to be attached to elements in the regular DOM tree – this shadow DOM tree starts with a shadow root, underneath which you can attach any element, in the same way as the normal DOM
+
+#### lifecycle hooks:
+
+constructor(): This is where the component is initialized. You can set default values and perform one-time setup.
+
+connectedCallback(): After the component is added to the DOM, this hook runs. It’s a great place to perform DOM manipulations and data retrieval.
+
+renderedCallback(): This hook is triggered after rendering occurs. It’s ideal for operations that require knowledge of the rendered DOM.
+
+disconnectedCallback(): When the component is removed from the DOM, this hook is invoked. Use it for cleanup operations and resource releases.
+
+errorCallback(): If an error occurs during rendering, this hook is called. It’s your opportunity to gracefully handle errors.
+
+
+![image](https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/42820bc5-6e2d-4d11-966e-4d4ec7957430)
+
+
+  #### component communication:
+
+  1.Passing data  from parent to child:
   
-  
-  
+  2.passing data from child to parent:
+
+**1.Parent to child:**
+
+````
+just create a public property using @api; in a child component
+
+@api prop;
+
+and passs it as prop in the child component from parent:
+<c-child prop="hell"></c-child>
+so when u pass the  it down the property prop will catch data from parent automatically.
+
+you can also able to call childs's methods from parent but the methods also needed to decorate with
+@api.
+````
+
+**2.child to parent**::
+
+communication in lwc is one way as you can only send data from parent to child, but reverse way is also possible.
+phenomeno also called as lifting the state up.
+
+how to acheive::
+
+1.either u can pass data on click of some action from child.
+````
+child:
+<button onclick={click handler}></button>
+
+msg="saurabh"
+clickhandler(e){
+ this.dispatchevent(new customevent('sendevent',{
+     detail: this.msg;
+        })
+}
+
+parent:
+As you named the event in child as sendevent...but you can register that name in parent only
+
+<c-child onsendevent={eventhandler} >
+
+here u need to mention "on" in front of custom event , from child we are passing data in sendevent.
+to catch it, it'll be catched in eventhandler: e.details
+eventhandler(e){
+ console.log(e.details); //this will print saurabh
+}
+
+````
+
+**We'll learn Pub-Sub / event emmmiter pattern in detials afterward...**
+<hr>
