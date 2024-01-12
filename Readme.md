@@ -336,4 +336,21 @@ eventhandler(e){
 ````
 
 **We'll learn Pub-Sub / event emmmiter pattern in detials afterward...**
-<hr>
+
+### Async Apex:
+
+1.Future Method          
+
+2.Batch Apex
+
+3.Queueable Apex
+
+4.Schedulable Apex
+
+Synchronous vs Async nature of programming Languages:: Parallel processing is possible in case of no dependancies between two processes. so we run the non dependant process on a saparate thread.In apex, async apex provides higher Governer limits than sync apex (example: in sync apex 100 soql calls but in async limit is 200). But:: Number of Async request in 24 hrs is also an governer Limit. So Inki shakti ka galat istamal nahi ho sakta!!!!! ...:> 
+When you have to divide the code in different threads then use future Methods. When u have to define logic in queue format, (as queue data structure, First in First out).and you have to chain the jobs like one after another and for every job there is saparate governer Limits. So every task/job in queue run in different transaction.So scope of Governer limit is high in case of queueable apex. Batch Apex is to handle millions of records converting it into small batches or chunks and every batch has it's own governer limits. And schedule apex is to run the peice of code at perticular defined time, we can acheive this using schedule apex.
+
+**1.FUTURE APEX:**
+
+Future methods are used to run processes on saparate thread, at the later time **when system resources are available.** future method runs when system resources are available so to explain with example.We have setup objects and non setup objects.example: setup objects are like 'User', 'Profile', 'Permission sets' and non setup are comman objects like 'account', 'contacts' etc. **So salesforce says you cannot handle both setup and non setup objects in single or same transaction.** if you have tried inserting user record and account record in same transaction, **You'll get Mixed DML exception.** So solution is to use Future Method,Run both insert operations on saparate threads to avoid Mixed DML operation.
+
