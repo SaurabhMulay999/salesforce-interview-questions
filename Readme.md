@@ -338,6 +338,7 @@ eventhandler(e){
 **We'll learn Pub-Sub / event emmmiter pattern in detials afterward...**
 
 ### Async Apex:
+<hr>
 
 1.Future Method          
 
@@ -353,4 +354,29 @@ When you have to divide the code in different threads then use future Methods. W
 **1.FUTURE APEX:**
 
 Future methods are used to run processes on saparate thread, at the later time **when system resources are available.** future method runs when system resources are available so to explain with example.We have setup objects and non setup objects.example: setup objects are like 'User', 'Profile', 'Permission sets' and non setup are comman objects like 'account', 'contacts' etc. **So salesforce says you cannot handle both setup and non setup objects in single or same transaction.** if you have tried inserting user record and account record in same transaction, **You'll get Mixed DML exception.** So solution is to use Future Method,Run both insert operations on saparate threads to avoid Mixed DML operation.
+
+```
+Code:
+
+global class Pokemon{
+
+@future  ---> this annotation is mandatory to define method as future
+
+public static void goPokemon(list recordids){  //return type must be always and void and method must be static in case of future method
+
+//future method only accept primitive data types and collection of primitive data types.
+pass; //process your logic here
+}
+}
+```
+**To be Noted on Future Methods:**
+
+1. annotate the method with @future, if doing callouts make sure write @future (Callouts=enabled/true)
+2. future methods only accept primitive data types as arguments to function.  (Salesforce introduced Queueable apex to overcome this issue : it can accept non primitive dtypes)
+3. future method used to avoid mixed dml exceptions.
+4. It provides higher governer limits
+5. it helps in webservice callouts.
+6. Does future methods are useful to avoid Timeout Exceptions which occure if callout takes more time than expected????
+
+On point no. 6::: It may or may not. but it won't guarante that it will be usefult to avoid timeout exceptions. but it can help in offloading long-running processes to asynchronous execution, which might indirectly contribute to avoiding certain timeout issues.
 
