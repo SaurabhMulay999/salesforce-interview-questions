@@ -164,7 +164,7 @@ If field access for either LastName or Description is hidden, this query throws 
 
 ### lightning web components
 <hr>
-Prerequisite: Javascript (If ain't have learnt yet,Fuck off!!)
+Prerequisite: Javascript (Find the Notes: <a href="">Javascript Notes</a>)
 
 Decorators:
 
