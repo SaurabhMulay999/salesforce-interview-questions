@@ -389,4 +389,32 @@ On point no. 6::: It may or may not. but it won't guarante that it will be usefu
 
 3.to handle larger data then use batch apex than future methods.
 
-4.No more than 50 mehods call per apex invocation.
+4.No more than 50 methods call per apex invocation. (it is a governer limits).So system wont allow more than 50 active future methods,so it's kind of governer limit.
+
+5.[IMP] The maximum Number of future method invocations per 24 hrs period is 250,000 or Number of user license* 200. This limit is for your entire org and is shared with all asynchronus Apex calls like batch apex, queueable apex, schedule apex and future method.All the work after limit breach will get rolled back or simple salesforce won't be doing that. If u want to increase the limit then Pay for more user license.
+
+````
+Example of future method:
+
+public class pokemon{
+ 
+ public static void usePokemon(){
+     Account a= new Account(Name='Sarah');
+     insert a;
+     util.callFuture();
+ }
+}
+class util{
+  @future
+  public static void callFuture(){
+     Profile p= [select id from Profile limit 1];
+     user u=new user(name='Pikachu',Profile=p.id);
+     insert u;
+  }
+}
+````
+
+So now just to avoid mixedDMLException we are running both insert operations on different different threads.
+
+
+
