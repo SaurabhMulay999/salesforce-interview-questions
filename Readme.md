@@ -380,3 +380,13 @@ pass; //process your logic here
 
 On point no. 6::: It may or may not. but it won't guarante that it will be usefult to avoid timeout exceptions. but it can help in offloading long-running processes to asynchronous execution, which might indirectly contribute to avoiding certain timeout issues.
 
+7. One future method cannot call another future method. If required to do so use Queueable Apex.So that u can able to chain the jobs.
+
+**Best Practices:::**
+1.ensure that future method execute fast as possible. So try to write minimal logic inside the method.
+
+2.Test future methods bulkily.
+
+3.to handle larger data then use batch apex than future methods.
+
+4.No more than 50 mehods call per apex invocation.
