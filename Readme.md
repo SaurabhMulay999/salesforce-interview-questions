@@ -470,4 +470,5 @@ when there are millions of records the queueable apex helps.
 
 2.You can add upto 50 jobs to queue with system.enqueuejob in single transaction. to check how many queueable jobs have been added in one transaction, call Limits.getQueueableJobs();
 
+3.There is no limit for depth of jobs, (It ain't recursion:) inf chaining possible but Parallely you can run only 5 jobs. 
 
