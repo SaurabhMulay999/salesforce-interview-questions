@@ -416,5 +416,58 @@ class util{
 
 So now just to avoid mixedDMLException we are running both insert operations on different different threads.
 
+#### Queueable Apex:
+
+1.Its a advance version of future methods. quueueable apex allow non primitive data as argument.
+
+2.It's simple called by System.enqueuJob(). 
+
+3.Interface which we are goin to implement is queueable interface,
+
+4.This queueable apex has simplicity of future methods and power of Batch Apex.
+
+**Advantages**
+
+1. It allows non-primitive Dtypes.
+2. When u submit your job call system.enqueueJob method. the method returns the id of asyncapex job record. You can use that ID to identify your job progress.
+3. Chaining jobs is possible. You can start another job from the current running job, so sequential processing is possible. 
+
+````
+Example:
+
+public class AccountUpdate implements Queueable{
+
+    private List<Account>accounts;
+    private ID Parent;
+
+    public AccountUpdate(list<account> records,ID id){
+         this.accounts=records;
+         this.Parent=id;
+    }
+
+    public void execute(QueueableContext context){
+        for(Account a:accounts){
+            a.parentId=Parent;
+         }
+       
+       update accounts;
+       System.enqueuJob(new Job()); //chaining the job
+    }
+}
+
+Queueable logics aren't that simple. it's just a exmple with min code;
+
+To run method:
+create a instance of class and pass it into enqueuJobs():
+ex:
+AccountUpdate ac=new AccountUpdate(accounts,Parentid);
+Id jobId=System.enqueuJob(ac);
+
+````
+when there are millions of records the queueable apex helps.
+
+1.The execution of queue job count once against the shared limit (2.5lakh) for async apex method executions.
+
+2.You can add upto 50 jobs to queue with system.enqueuejob in single transaction. to check how many queueable jobs have been added in one transaction, call Limits.getQueueableJobs();
 
 
