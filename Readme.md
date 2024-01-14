@@ -573,7 +573,51 @@ Apex Jobs ==> It helps you to monitor the job.
 2. The interviewer won't be going to tell you to implement the scenarios but well these topics must be conceptually strong to crack the interview.
 
 
+### Exceptions::
+<hr>
 
+1. Exceptions are Runtime errors which stop the execution of a program.
+2. DML Exceptions: A DMLException is thrown when DML operation fails.
+3. QueryException: When query statement fails to execute.
+4. sObject Exception: It throws when you work on some object and it fails. (Writing text in number field or Making required field Null)
+5. listException: When a Problem occurs with a list or list of sObjects then this throw.
+6. NullPointerException: When u  dereference null object. Ex( Account a; , a.Name='saurabh' ) will throw nullptr
+7. MathException: When a mathematical operation fails.
+8. TypeException: when there is data type mismatch.(or when typecasting was not right)
+9. Limit Exception: When the resource limit has exceeded then this limit exceptions are thrown.(when resource hit governer limits)
+10. JSONException : When there are error while parsing a JSON string this exception thrown.
+    
 
+````
+//DMLEXception
+Account a=new Account();
+insert a;  //will throw DMLException. (You're trying to insert account with no mandatory field filled in)
 
+//QueryException
+Account a=[select id,name from account where name='Sarah'];
+//If no record found it'll throw query Exception : List has no rows...
 
+//listException
+list<string> str=new list<string>();
+str.add('Saurabh');
+str.add('sarah');
+system.debug(str[1]); //sarah
+system.debug(str[2]); //Element wont exist so will throw ListException.
+
+//NullPointerException
+Account a;
+a.name='Saurabh';  //this will throw the null pointer exception, because we have not called the constructor above.
+insert a;
+
+//Limit Exception:
+for(Account a: [select id From account]){  //or just try a kind of infinite for loop and it will throw CPU time limit exceeded.
+    a.Name+='updated';
+    insert a;
+} 
+````
+
+**Interview Tips and Questions on Exceptions::**
+1. The interviewer mostly asked questions on best practices and the exceptions that we faced during project tenure.
+2. use try catch to handle exceptions.
+3. You have multiple abstract methods associated with the exception object. Example catch(Exception e){ debug(e.getTypeName(), e.getMessage(), e.getCause(), e.getLineNumber(), e.getStackTraceString()) }
+   
