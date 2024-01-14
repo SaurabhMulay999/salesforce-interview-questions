@@ -567,6 +567,12 @@ Setup ==> Apex classes => Schedule Apex ==> Job Name ==> Time ==> Successfully S
 To track:
 Apex Jobs ==> It helps you to monitor the job.
 
+**NoTes on Above topic::**
+
+1. Most of the interview questions were asked about async Apex are related to Some Business logic and interfaces and Most of the questions were asked on governor limits.
+2. The interviewer won't be going to tell you to implement the scenarios but well these topics must be conceptually strong to crack the interview.
+
+
 
 
 
