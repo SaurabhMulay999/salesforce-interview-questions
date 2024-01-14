@@ -544,6 +544,30 @@ Heap Size: Normal Context:6Mb, Batch or async Context: 12Mb
 #### Schedulable Apex:
 
 1. You can delay the execution so that you can run apex classes at the specified time.
+2. it is also possible to invoke batch apex using schedule apex.
+3. The class or method will start executing at that respective time, but sf won't guarantee that schedule apex will invoke exactly at a defined time.
+4. Actual execution time maybe delayed based on resource or service availability.
+5. You can only have 100 scheduled Apex jobs at one time.
+
+Example: Code
+```
+global class Reminder implements Schedulable{
+  
+  global void execute(SchedulableContext st){
+    list<account> accs=[select id,name,email from account limit 5];
+    //assume sendEmail implementation: to send emails of accouts
+    Utis.sendEmail(accs);
+    
+  }
+}
+```
+**How to schedule the job:**
+Setup ==> Apex classes => Schedule Apex ==> Job Name ==> Time ==> Successfully Scheduled a Job.
+
+To track:
+Apex Jobs ==> It helps you to monitor the job.
+
+
 
 
 
