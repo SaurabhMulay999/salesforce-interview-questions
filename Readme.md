@@ -620,4 +620,3 @@ for(Account a: [select id From account]){  //or just try a kind of infinite for 
 1. The interviewer mostly asked questions on best practices and the exceptions that we faced during project tenure.
 2. use try catch to handle exceptions.
 3. You have multiple abstract methods associated with the exception object. Example catch(Exception e){ debug(e.getTypeName(), e.getMessage(), e.getCause(), e.getLineNumber(), e.getStackTraceString()) }
-   
