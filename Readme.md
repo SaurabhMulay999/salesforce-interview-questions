@@ -472,3 +472,73 @@ when there are millions of records the queueable apex helps.
 
 3.There is no limit for depth of jobs, (It ain't recursion:) inf chaining possible but Parallely you can run only 5 jobs. 
 
+
+#### Batch Apex:
+
+1.Batch apex is used to run large jobs (in millions of records) that may exceed normal processing limits.
+
+2.Using Batch Apex you can process records asynchronously in batches. Every batch has its own governer limits. Max we can query 50 Million records.
+
+3.Methods to implement in batch apex: 1.Start 2.execute 3.finish
+
+4.start method used to fetch the records, in 'execute' method business logic runs and in finish method we can able to write post processing logics.
+
+**Example**:
+
+```
+global class UpdateAcc implements Database.Batchable<sObject>{
+  
+  global Database.QueryLocator;
+  
+  start(Database.BacheableContext bc){
+    string q='select id,Name from account';
+    return Database.getQueryLocator(q);
+  }
+  global void execute(Database.BacheableContext bc, List<Account>scp){
+    for(Account a: scp){
+      a.Name+='Updated by batch class';
+    }
+    
+    update scp;
+  }
+  global void finish(Database.BacheableContext bc){
+    //post processing logic
+  }
+  
+}
+```
+In batch class we have to implement the interface Database.Bachable.
+
+To run the above methods or class:
+```
+UpdateAcc acc=new UpdateAcc();
+Id jobId=Database.executeBatch(acc);
+//pass the instance of class in executebatch
+```
+
+If in scenario, wanted to reduce batch size that can be acheivable by:
+
+**Why to reduce Bacth Size????**
+
+=> Example, suppose you have 2 records : one has only 3 fields filled in (minimum data) and second record has upto 50 fields filled in.
+Now in the memory the second instance or record would weigh higer than the first one. So it is not recommanded but a good practice to reduce the batch size when you have weighted data or records, or we can say heavy records.
+
+```
+UpdateAcc uac=new UpdateAcc();
+Id jobId=Database.executeBatch(uac,100);
+
+//here we kept batch size 100
+```
+
+**Governer Limits::**
+
+SOQl Query::  Normal Context: 100 Soql per transaction,  Batch Context: 200 Soql Per transaction
+
+Records Retrieve: Normal Context: 50,000 , Batch Context:50 Million records
+
+Executed code statement: Normal context:6M charactors (Total in org)  Batch context: 12M charactors
+
+Heap Size: Normal Context:6Mb, Batch or async Context: 12Mb
+
+
+
