@@ -541,4 +541,9 @@ Executed code statement: Normal context:6M characters (Total in org)  Batch cont
 Heap Size: Normal Context:6Mb, Batch or async Context: 12Mb
 
 
+#### Schedulable Apex:
+
+1. You can delay the execution so that you can run apex classes at the specified time.
+
+
 
