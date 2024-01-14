@@ -534,9 +534,9 @@ Id jobId=Database.executeBatch(uac,100);
 
 SOQl Query::  Normal Context: 100 Soql per transaction,  Batch Context: 200 Soql Per transaction
 
-Records Retrieve: Normal Context: 50,000 , Batch Context:50 Million records
+Records Retrieve: Normal Context: 50,000, Batch Context:50 Million records
 
-Executed code statement: Normal context:6M charactors (Total in org)  Batch context: 12M charactors
+Executed code statement: Normal context:6M characters (Total in org)  Batch context: 12M characters
 
 Heap Size: Normal Context:6Mb, Batch or async Context: 12Mb
 
