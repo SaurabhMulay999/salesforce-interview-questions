@@ -624,3 +624,9 @@ for(Account a: [select id From account]){  //or just try a kind of infinite for 
 
 ### SalesForce REST API:
 <hr>
+
+REST: Representational State Transfer. (Protocol is stateless).
+It may be less secure than Soap API.
+
+Statelessness:: meaning each request from a client contains all the information needed to understand and process the request.
+The server does not store any information about the client between requests.
