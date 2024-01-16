@@ -669,14 +669,11 @@ global string string PostMethod(){
 } 
 
 @HttpGet
-global static sObject GetMethod(){
-
-}
+global static sObject GetMethod(){}
 
 @HttpPut
-global static string PutMethod(){
+global static string PutMethod(){}
 
-} 
 }
 ```
 
