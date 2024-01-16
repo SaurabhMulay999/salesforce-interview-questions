@@ -677,6 +677,25 @@ global static string PutMethod(){}
 }
 ```
 
+### Integration (Salesforce): (Primary Written content taken from Apex Hours lectures):
+<hr>
+
+Considering data formatting, 
+**Are JSON and JS Objects are same??**
+
+==> JSON is a language-agnostic data-interchange format.
+
+The syntax of JSON was inspired by the JavaScript Object Literal notation, but there are differences between them.
+
+For example, in JSON all keys must be quoted, while in object literals this is not necessary:
+```
+// JSON:
+{ "foo": "bar" }
+
+// Object literal:
+var o = { foo: "bar" };
+
+```
 
 
 
