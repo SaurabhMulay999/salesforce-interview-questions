@@ -630,3 +630,28 @@ It may be less secure than Soap API.
 
 Statelessness:: meaning each request from a client contains all the information needed to understand and process the request.
 The server does not store any information about the client between requests.
+
+Suppose there is an Integration Between Salesforce and Github::
+
+We can say every time a new account is created in Salesforce that would call Github API to create its users. So here salesforce acts as a source. This will be called **Outbound** calls.
+If GitHub hits/consumes salesforce then it would be **inbound** calls. (here if you're from the salesforce side then consume would be the better choice of word and if you are Github team then you can use 'hits').
+
+We can able to implement HTTP methods: GET, POST, PATCH, DELETE, and PUT. Because RESTful services are commonly implemented over HTTP.
+The PATCH method is used to apply partial modifications to a resource. It is typically used when you want to update only a portion of the resource's data, rather than replacing the entire resource.
+
+Notes:
+1. When you have to mention some extra logic, and calculation then implement a custom API or else use the standard one that Salesforce provides.
+2. Access Modifiers in Salesforce::
+
+private: Visible only within the same class.
+public: Visible in the same Salesforce namespace.
+global: Visible in any Salesforce org, including external systems making RESTful requests.
+
+Consume an API::
+
+```
+
+
+
+```
+
