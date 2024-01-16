@@ -677,7 +677,7 @@ global static string PutMethod(){}
 }
 ```
 
-### Integration (Salesforce): (Primary Written content taken from Apex Hours lectures):
+### Integration (Salesforce):
 <hr>
 
 Considering data formatting, 
@@ -695,6 +695,11 @@ For example, in JSON all keys must be quoted, while in object literals this is n
 // Object literal:
 var o = { foo: "bar" };
 
+The data types in JSON are also restricted to the following values:
+1.string
+2.number
+3.object
+4.array
 ```
 
 
