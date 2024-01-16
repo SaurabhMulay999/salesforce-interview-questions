@@ -702,5 +702,11 @@ The data types in JSON are also restricted to the following values:
 4.array
 ```
 
+The use of integration is to connect two different modules or systems together so they can interact and share the data in between. To perform integration salesforce provides different tools.
+**At low code level:** MileSoft Composer
+
+**Low Code+Code:** Platform events, Change Data Capture, Salesforce flow, Salesforce Connect, External Services.
+
+**Dev Tools:** Apex, Platform APIs, Heroku connect, Mulesoft Anypoint Platform.
 
 
