@@ -640,18 +640,45 @@ We can able to implement HTTP methods: GET, POST, PATCH, DELETE, and PUT. Becaus
 The PATCH method is used to apply partial modifications to a resource. It is typically used when you want to update only a portion of the resource's data, rather than replacing the entire resource.
 
 Notes:
-1. When you have to mention some extra logic, and calculation then implement a custom API or else use the standard one that Salesforce provides.
+1. When you have to mention some extra logic, and calculation then implement a custom API or else use the standard one that Salesforce provides. 
 2. Access Modifiers in Salesforce::
 
 private: Visible only within the same class.
+
 public: Visible in the same Salesforce namespace.
+
 global: Visible in any Salesforce org, including external systems making RESTful requests.
 
 Consume an API::
 
 ```
+//blob: binary large Object data type.
 
+//RestContext has two props 'request' and 'response';
+//So when 3rd party user has requested data/request has put into RestContext.request
 
+RestResource(urlMapping='/CreatePokemon')
+global class Restful{
+@HttpPost
+global string string PostMethod(){
+    RestRequest req=RestContext.request;
+    RestResponse res=RestContext.response;
+    Blob bdy=req.requestBody;
 
+    return res.toString();
+} 
+
+@HttpGet
+global static sObject GetMethod(){
+
+}
+
+@HttpPut
+global static string PutMethod(){
+
+} 
+}
 ```
+
+
 
