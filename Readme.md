@@ -895,13 +895,12 @@ After performing git rm: file is removed from the staging area and is now untrac
 
 
 
+**GIT DIFF::**
 
+If you want to check the diff between 2 commits:
+```
+get the commit Ids (To get Commit Id, hit git log)
 
+git diff <firstCommitId> <secondCommitId>
 
-
-
-
-
-
-
-
+```
