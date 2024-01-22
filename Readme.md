@@ -904,3 +904,46 @@ get the commit Ids (To get Commit Id, hit git log)
 git diff <firstCommitId> <secondCommitId>
 
 ```
+
+Now we have learned about git, what about GitHub??? Publically we need the visibility of the code, we have a local repo that can be shared over the local network but if we need it to be shared publically then we need GitHub repos. How to connect the GitHub repo and your local repo? let's check how!¡¡
+
+```
+git remote add origin __URL__
+```
+
+**What is git remote??**
+
+Git remote helps us to connect or link  the local repository to the GitHub repository. So with git remote, we can able to access both of the repos. So from local we can push the changes to GitHub or from GitHub we can pull or download the changes to the local repository.
+
+```
+git remote
+
+git remote add
+```
+
+With git remote add, you can actually establish or create a new repo connection. Then you have to name that connection, generally, ppl write "origin" like git remote add origin, but that name can be anything. it just a name of connection. and after that, you have to mention a URL to establish a connection. 
+
+```
+git remote add origin(this origin can named as anything)  __URL__
+(Now if you hit **git remote** after this it'll return you "Origin" as the new connection named origin added)
+
+you can also delete established connections by doing:
+
+git remote rm 
+```
+
+to push the code to the GitHub repo use:
+
+```
+git push origin<remoteName> master
+
+```
+to pull the code from the Github repo:
+
+```
+git pull origin<RemoteName> master
+
+```
+
+
+
