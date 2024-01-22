@@ -945,6 +945,6 @@ git pull origin<RemoteName> master
 
 ```
 But to pull the code your staging area must be clean. So either you have to stash the changes or you have to commit them.
-When someone is modifying the code and you're also doing the same merge conflict occurs and you have to manually resolve it.
+When someone is modifying the code and you're also doing the same and try to pull the code merge conflict occurs and you have to manually resolve it.
 
 
