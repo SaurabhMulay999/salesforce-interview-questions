@@ -887,11 +887,11 @@ git restore --staged <filename>
 ```
 Now if you perform git rm --cached <filename>, It'll remove the whole file from the staging area and the file is now untracked. **So if you want your file to be back in an untracked area then only use git rm.**
 
-After performing git rm: file is removed from staging area and now untracked.
+After performing git rm: file is removed from the staging area and is now untracked.
 
 <img width="265" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/1b00e9a7-6b1f-4f25-a2d4-5e5c3d7617cf">
 
-**If we just want the changes to be moved to the working area and staging area then use git restore. git restore only manages last changes**
+**If we just want the changes to be moved to the working area and staging area then use git restore. git restore only manages the last changes**
 
 
 
