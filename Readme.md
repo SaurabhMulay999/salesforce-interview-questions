@@ -709,4 +709,60 @@ The use of integration is to connect two different modules or systems together s
 
 **Dev Tools:** Apex, Platform APIs, Heroku connect, Mulesoft Anypoint Platform.
 
+There is a lot to be added, wait!¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
+
+#### Git:
+Don't expect these questions in Interviews but learning perspective or to do open source contribution learning git is important.
+
+To Initialise the git repo:
+```
+git init 
+```
+git status is used to check file status:
+```
+git status
+
+No commits yet
+untracked files:
+    file1
+    file2
+
+use git add to track the changes
+```
+When you activate the version control of your project, your files may  lie in 3 different areas:
+1. Working/local area
+2. Stagged Area
+3. Repository Area
+
+**Working Area:**
+
+The working area is where your file locally resides. Version control is used to track different versions of your code/files. There can be a bunch of files that were not handled by git. or changes in those files
+were not yet tracked by git yet. The file which is in a working area is considered to be not in the staging area. and as seen above "Untracked files" return by git status so we can conclude that the
+file1 and file2 are in the working area because those files ain't tracked by git. To check files in working area hit git status.
+
+But Git won't be goin to track every single file, you need to mention which file needs to be tracked.
+
+**Staging Area:**
+Files in the staging area will be going to tell you what are the Files which are going to be part of your next version. This stagged area is place where git knows what changes will be done from files last version to the next version. So git suggests using git add to add files to stage area. So whichever version of a file you create, you going to add the files using git add.
+
+Try:
+````
+git add README.md
+
+````
+and hit git status again:
+it'll show up a message,
+
+```
+Changes to be committed:
+     Use git rm --cached <file> to unstaged (So in my understanding, this cmd will put file again from staging area to working)
+     new File: README.md
+Untracked files:
+     file1
+     file2
+```
+
+So here we have added README.md from the working area to the staged area by mentioning **git add README.md**.
+
+
 
