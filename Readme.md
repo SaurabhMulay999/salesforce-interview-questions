@@ -799,7 +799,24 @@ Press q if you want to get out of commit logs.
 ```
 
 Now suppose you have added the file in the stagged area and have committed the file. If you have added the changes in that particular file. The file is already tracked, so the file won't be going to be untracked.
+
 Example:
+1. Git status:
+   <img width="293" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/c681fa70-ddf9-4878-970b-d7ccf99a4028">
+
+2. git add Readme. md and hit git status
+   <img width="308" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/f6ae1461-e963-4ba7-9281-fc30da32e0a0">
+
+3. git commit -m "First commit"
+   <img width="257" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/2ec326fd-e681-40a0-8b5d-fff77f1ff8e3">
+
+4. Now changes made to that file, the file is already getting tracked.
+    <img width="296" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/98059b83-7d4f-4cf4-8202-f9f8bfabfac6">
+
+    But the new File which we create will be untracked:
+   
+    <img width="299" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/18f08369-bcf0-417e-8220-a11304402db7">
+
 
 
 
