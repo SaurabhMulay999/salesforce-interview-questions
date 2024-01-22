@@ -711,7 +711,9 @@ The use of integration is to connect two different modules or systems together s
 
 There is a lot to be added, wait!¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
 
-#### Git:
+### Git / Version Control:
+<hr>
+
 Don't expect these questions in Interviews but learning perspective or to do open source contribution learning git is important.
 
 To Initialise the git repo:
@@ -820,6 +822,42 @@ Example:
     But the new File which we create will be untracked:
    
     <img width="299" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/18f08369-bcf0-417e-8220-a11304402db7">
+
+    If you hit git restore Readme. md. (it will discard the local changes or changes in your working area: changes are reverted and file Readme.md is aint mofied anymore)
+
+    <img width="337" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/48b56fd3-7b67-48a5-99a1-30779cb70ab3">
+
+IMP:
+
+So git restore removes all file changes from the staging area to be committed. So instead of deleting lines one by one, you can use git restore. Suppose you have a file that is already committed and in the same file if 
+you have added a piece of code. So that piece of code will be in your working area. so if you perform git restore then it'll remove the piece of code you have added to the existing file. But if you added that file to the staging area by performing git add Readme. md with that piece of code you have added. So those changes or pieces of code will be now in the staging area, so if you do git restore <file> when you're file is in the staging area the command won't work.
+
+So you need to perform:
+```
+git  restore --staged <filename>
+```
+This command will pick staged change and put it into the working area and then you can revert it using git restore.
+
+Example:
+
+First I have added the file to the staged Area by adding a few more changes:
+
+<img width="235" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/b90c168f-d778-44fb-bf8d-b9b57d9d5325">
+
+
+Now If you hit git restore Readme. md. The command won't be going to delete changes as the file is in the staging area not in the working area. Now you need to perform : git restore --staged <filename> So your previous changes which you have made or file moved back to the working area.
+
+<img width="362" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/c8226491-bf02-4320-91dd-1f12a9dcd5b4">
+
+Now you can do "git restore <fileName>" so your recent changes are getting removed.
+
+
+NOTE: First Time you'll find it critical to understand but start doing small open contributions so it will be very helpful to understand it more.
+
+
+
+
+
 
 
 
