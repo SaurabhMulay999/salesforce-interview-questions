@@ -764,5 +764,46 @@ Untracked files:
 
 So here we have added README.md from the working area to the staged area by mentioning **git add README.md**.
 
+```
+to remove files from the staging area. (So files will again being untracked)
+
+git rm --cached README.md
+```
+
+**Repository Area:**
+This area contains the details of all your previous registered versions. And for the files in this area, the git knows their history.
+To move files from the staging area to the Repository area, it creates a version. and it is being called "Commit"
+
+**Commit is a particular version of the project**, It captures a snapshot of the project's staged changes and creates a version of it.
+
+```
+git commit
+```
+So the overall Flow is to add files from working area to the staging area by using 
+```
+git add README.md
+```
+
+Then to push or to create a new version out of it. you have to commit the changes
+```
+git commit -m "This is the commit"
+```
+So now the files that are in the staging area  will be going to be part of that particular version. Remember "Will going to be part of version".
+
+To check all commits:(Listing down all commits of repo)
+```
+git log
+
+Press q if you want to get out of commit logs.
+
+```
+
+Now suppose you have added the file in the stagged area and have committed the file. If you have added the changes in that particular file. The file is already tracked, so the file won't be going to be untracked.
+Example:
+
+
+
+
+
 
 
