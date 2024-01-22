@@ -854,6 +854,45 @@ Now you can do "git restore <fileName>" so your recent changes are getting remov
 
 NOTE: First Time you'll find it critical to understand but start doing small open contributions so it will be very helpful to understand it more.
 
+Then the main question is why we use git rm::
+Git rm won't work if your file has changes in the staging area and in the working area. or file itself in the staging area and working area:
+
+```
+command:
+git rm --cached <filename>
+```
+
+Let's try:
+Currently, I have an untracked file.
+
+<img width="272" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/63b8fc7c-dbc0-4ca3-8c74-da8d0c6d8b2e">
+
+Now if I modify that file and add it to the staging area by doing git add.
+
+<img width="230" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/48475f9b-5d66-478c-a1f7-a5bd97a7b334">
+
+
+After adding it to the staging area now I locally changed/modified the file. Now my new changes are in the working area.
+
+<img width="295" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/5aef293a-e372-4179-9ce3-ff2170446695">
+
+Now if I hit git restore, it will discard the changes that are in working area. But if I do git rm <file> It won't allow me if my changes are in the staging area.
+
+<img width="317" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/4423bfed-3e67-4c83-a8af-1f8ef9b92362">
+
+So we first need to remove that file from the staging area, to perform git rm. so we can use the following command.
+```
+git restore --staged <filename>
+
+```
+Now if you perform git rm --cached <filename>, It'll remove the whole file from the staging area and the file is now untracked. **So if you want your file to be back in an untracked area then only use git rm.**
+
+After performing git rm: file is removed from staging area and now untracked.
+
+<img width="265" alt="image" src="https://github.com/SaurabhMulay999/SF_InterviewQuestions/assets/90036775/1b00e9a7-6b1f-4f25-a2d4-5e5c3d7617cf">
+
+**If we just want the changes to be moved to the working area and staging area then use git restore. git restore only manages last changes**
+
 
 
 
