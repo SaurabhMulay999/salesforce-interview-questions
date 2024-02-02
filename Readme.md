@@ -948,6 +948,60 @@ But to pull the code your staging area must be clean. So either you have to stas
 When someone is modifying the code and you're also doing the same and try to pull the code merge conflict occurs and you have to manually resolve it.
 
 
-### TypeScript (Fully Optional: LWC initially not support TS, Officially they are working on it)
+### TypeScript (Fully Optional: LWC initially did not support TS, Officially they are working on it)
 <a href="https://github.com/salesforce/lwc/issues/3699#issuecomment-1723278031">TypeScript Support -LWC</a>
 <hr>
+
+**So either way, write your LWC code in TypeScript then transpile it down to JS (Locally).**
+1. Typescript is a superset of Js or a Javascript with type checking.
+2. Most of the open source projects use typescript over javascript. because at compile time only we get to know the errors.
+3. Js is kind of interpreted language so At runtime we got to know about the errors so to avoid and have a type safety most of projects (large codebases) use typescript.
+
+Let's play with TS:
+
+0. Install Ts npm i -g typescript
+1. First open a VS code, Type npm init -y to initialize in a terminal.
+2. Then to create the TS config file: write, npx tsc --init. (it will create tsconfig file)
+3. create a file: touch index.ts
+4. write a code now. 
+
+```
+index.ts
+
+let num: number=10;
+console.log(num);
+num="saurabh"
+
+```
+
+Usually, browsers or Node don't know Typescript. So Typescript always compiles down to JavaScript. So browser and Node env only understood Javascript. and TsConfig file contains the settings that we can enable or disable and as required it determines how we can run or compile TypeScript. 
+
+TypeScript Compiler: tsc is the compiler used to convert Typescript to JavaScript. 
+
+```
+node index.ts
+```
+
+It'll throw error: So first run to compile
+
+```
+tsc -b
+
+//first it'll throw the error as the above code:
+//type of num is Number and we are trying to assign a string to it:
+
+So modify the code as:
+
+let num: number=10;
+console.log(num);
+
+now run
+tsc -b
+
+```
+that typescript compiler : tsc -b will search for the config file. If no config file is found it'll not goin to transpile the code. 
+
+Now it will create another file named: (If no compile error is found), Now you can run that Javascript file:
+```
+node index.js
+```
