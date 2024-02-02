@@ -948,3 +948,5 @@ But to pull the code your staging area must be clean. So either you have to stas
 When someone is modifying the code and you're also doing the same and try to pull the code merge conflict occurs and you have to manually resolve it.
 
 
+### TypeScript (Fully Optional: LWC initially not support TS, Officially they are working on it)
+<br>
