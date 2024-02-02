@@ -949,4 +949,5 @@ When someone is modifying the code and you're also doing the same and try to pul
 
 
 ### TypeScript (Fully Optional: LWC initially not support TS, Officially they are working on it)
-<br>
+<a href="https://github.com/salesforce/lwc/issues/3699#issuecomment-1723278031">TypeScript Support -LWC</a>
+<hr>
