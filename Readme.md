@@ -999,9 +999,51 @@ now run
 tsc -b
 
 ```
-that typescript compiler : tsc -b will search for the config file. If no config file is found it'll not goin to transpile the code. 
+that typescript compiler: tsc -b will search for the config file. If no config file is found it'll not goin to transpile the code. 
 
 Now it will create another file named: (If no compile error is found), Now you can run that Javascript file:
 ```
 node index.js
 ```
+
+To deal with Functions:
+
+```
+Types: String, boolean, number, null, undefined
+
+
+function fn(string:name):<Return Type> number{
+   console.log('Hii',name);
+}
+let name:string='saurabh';
+
+fn(name);
+
+//Now the type must not be implicitly any so Ts says tell me explicitly if the parameter is any.
+so,
+
+function fn(Name){
+}
+
+will give you an  Error and now you need to mention the parameter type explicitly.
+
+function (name:any){} or function(name:string){}
+
+```
+
+Code: to add two Numbers:
+```
+let n:number=2;
+let m:number=4;
+
+funtion fn(n:number, m:number):number{
+    return n+m;
+}
+
+let res:number=fn(n,m);
+console.log(res);
+
+```
+
+
+
