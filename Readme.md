@@ -1390,8 +1390,63 @@ function moveDirection(direction:Dir){
     if(direction=== Dir.Up){ //pass }
 }
 
-//so it can be used if you have limited set of values, you can define it in enum.
+//so it can be used if you have a limited set of values, you can define it in enum.
 
 ```
+
+**Generics:**
+Suppose you don't know the array data type and you have to return values from that array (assume array.length>0 ) so you have to return array[0] but it can be either any data type!¡¡
+
+this issue can be solve with below approch: But what is the issue with that approch???
+
+```
+type arrayInput= string | number | boolean;
+
+function print(array:arrayInput[]):arrayInput{
+    return array[0];
+}
+const v=print(['sarah','srbh']);
+console.log(v);  //Will print sarah
+
+```
+
+For now the return type is string, Now try using string related methods on it.
+```
+type arrayInput= string | number | boolean;
+
+function print(array:arrayInput[]):arrayInput{
+    return array[0];
+}
+const v=print(['sarah','srbh']);
+console.log(v.charAt(0));  //COMPILE TIME ERROR: That the charAt can't be used on type Number.
+
+```
+So rather than the tuple you can have type as either string[] or the number[] so type arrayInput makes no sense.
+
+```
+function print(array: number[] | string[] ):arrayInput{
+    return array[0];
+}
+```
+But better way to solve is through generic programms.
+T => can infer the type correctly (you'll understand if familier with Generics in java)
+
+**So Generics can work with any data types and still provide the compile time type safety!¡¡**
+
+Example:
+
+```
+//args can be auth token or password or otp
+
+function authenticate<T>(arg:T):T{
+    return arg;
+}
+
+let user1=authenticate<string>('Pass@123');
+let user2=authenticate<number>(1233);
+
+console.log(user1.charAt(0),user2)  //now it will work!¡¡
+```
+
 
 
