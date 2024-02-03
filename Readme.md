@@ -1339,8 +1339,59 @@ function filter(arr:Students[]):Students[]{
 
 console.log(filter(arr));
 ```
+An array with multiple data types can called a tuple in TS, It ain't the same implementation as Python.
+```
+function fun():[number,string,boolean]{
+    return [1, 'Stre', true];
+}
+```
 
-**Enums:**
+**Enums:** (JS don't have enums)
 
+Enums in ts allows you to define the set of named constants.
+a way to present a set of constant values. which can be represented as numbers or strings.
+
+why do we need Enum:
+
+```
+//suppose a function does move you're Chessboard queen
+
+function moveDirection(direction){
+    //logic based on direction
+}
+
+//now here I can pass anything in function irrespective of the valid values.
+//example: and now 'Saurabh'  is not a valid argument, so to enforce that we can use an enum.
+
+moveDirection('saurabh');
+```
+
+another best way to resolve this issue is with types:
+
+```
+type direction=" UP" | "DOWN" | "Diagonal";
+```
+so now with types we can enforce these only set of values to the function parameter.
+
+How to use Enums:
+
+```
+enum Dir{
+      Up,
+      Diagonal,
+      Left,
+      Right,
+      down
+}
+
+//I have provided the enum values above:
+
+function moveDirection(direction:Dir){
+    if(direction=== Dir.Up){ //pass }
+}
+
+//so it can be used if you have limited set of values, you can define it in enum.
+
+```
 
 
