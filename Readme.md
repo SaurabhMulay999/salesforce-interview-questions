@@ -1236,7 +1236,7 @@ So types come into the picture. but interfaces can be implemented with classes b
 
 Similar to Interfaces types can be used to aggregate the data together.
 
-To define a type:(kind of same as interface)But types cant be used to implement by classes.
+To define a type:(kind of same as interface)But types can't be used to implement by classes.
 ```
 type product={
 name: string,
@@ -1257,7 +1257,7 @@ function sum(strNum: Snumber){
     console.log(strNum);
 }
 
-//so now it can accepts both
+//so now it can accept both
 sum('12323');
 sum(1232);
 ```
@@ -1270,17 +1270,18 @@ example:
 
 ```
 type product={
-    name:string,
-    cost:number
+    name: string,
+    cost: number
 }
 type seller={
-    Sellername:string,
-    id:number
+    Sellername: string,
+    id: number
 }
+//seller or product can be interfaces also.
 
 type FinalProd=product & seller;
 
-const p:FinalProd={
+const p: FinalProd={
     name:'Mobile',
     cost:12,
     Sellername:'asthetic',
@@ -1289,3 +1290,57 @@ const p:FinalProd={
 
 console.log(p);
 ```
+**Interview question:**
+What is diff between the type and interfaces??? In above article we have covered those points!¡¡
+
+**Arrays and Enums in Typescript::**
+
+arrays in js can hold different data types. So to define a type we use <type>[];
+Only type can do this::
+````
+type NumberArray=number[];
+function getElementatI(arr:NumberArray){}
+OR
+function getElementatI(arr:number[]){}
+````
+
+**Problem**: Create an array of Students: with Students is an object with properties name and marks and filter down the students with marks less than 50.
+Solution:
+
+```
+interface Students{
+    name: string,
+    mark: number,
+}
+
+//create the students with names and marks
+let arr:Students[]=[];
+
+for(let i=0;i<10;i++){
+    const student={
+        name:'s'+i,
+        mark:Math.floor(Math.random() * 90 + 10),
+    }    
+    arr.push(student);
+}
+
+//create a filter function to filter down student marks less than 50
+
+function filter(arr:Students[]):Students[]{
+    const array:Students[]=[];
+
+    for(let stu of arr){
+        if(stu.mark<50){
+            array.push(stu);
+        }
+    }
+    return array;
+}
+
+console.log(filter(arr));
+```
+
+**Enums:**
+
+
+
