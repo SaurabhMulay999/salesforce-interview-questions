@@ -714,7 +714,7 @@ There is a lot to be added, wait!¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
 ### **Let Cover some backend::**(Complete Optional): Node js 
 <hr>
 
-Js can be used with backends. we use its runtime Example Node, browsers, Bun (Written in Zig).
+Js can be used with backends. we use its runtime Example Node, browsers, Bun (Written in Zig). The best example of frontend + backend is the chatGpt, Open API has a close source model so they never going to run the AI model on your machine/browser. So openAI server is Backend, Some code runs for the input you have given to Message box.
 
 
 
