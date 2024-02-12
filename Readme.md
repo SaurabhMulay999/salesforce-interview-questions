@@ -716,28 +716,31 @@ There is a lot to be added, wait!¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
 
 Js can be used with backends. we use its runtime Example Node, browsers, Bun (Written in Zig). The best example of frontend + backend is the chatGpt, Open API has a close source model so they never going to run the AI model on your machine/browser. So openAI server is Backend, Some code runs for the input you have given to Message box.
 
+Http Server: 
+Https primarily a protocol define how machines will goin to interact with each other. Http server exposes the service to the world. Like it accepts input from the user and after some checks it'll respond or send the response to the client. 
+
+```
+function init(input:string){
+    return response;
+}
+```
+
+So directly or indirectly you as a client hiting some one's functions or code. And server respond back with some data well.
+
+Client needs to know about the endpoints, The auth flow, Header, body, queryParams, Method (POST,GET,PATCH,PUT) and whether it hosted on https or http protocol. and when server receive the request it must have respond with response body, status code, respone headers. 
+
+**URL:**
+**https://** ---> is protocol.
+
+**google.com**--> is the url.
+
+**/fetch/github/users** ---> is the Routes.
 
 
+Why do we need status codes and the headers if we have response body?? Because https is protocol...we have to follow anyway. It's a set of rules. 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Start from!!!!!!!!
 
 
 ### Git / Version Control:
