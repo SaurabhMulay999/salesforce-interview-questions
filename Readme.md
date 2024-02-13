@@ -739,9 +739,9 @@ Client needs to know about the endpoints, The auth flow, Header, body, queryPara
 
 Why do we need status codes and the headers if we have response body?? Because https is protocol...we have to follow anyway. It's a set of rules. 
 
+So google is just a domain Name behind that every domain or DN has Assigned to an IP. try **ping google.com** and you'll get and IP. behind the scene DNS do it for you , 
 
-# Start from!!!!!!!!
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Git / Version Control:
 <hr>
