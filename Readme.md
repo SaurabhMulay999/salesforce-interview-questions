@@ -741,7 +741,24 @@ Why do we need status codes and the headers if we have response body?? Because h
 
 So google is just a domain Name behind that every domain or DN has Assigned to an IP. try **ping google.com** and you'll get and IP. behind the scene DNS do it for you , 
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+To create an Http server:
+```
+const express=require('express');
+const port=3000;
+
+const app=express();
+
+app.get('/', (req,res)=>{
+  res.send('Hi sarah');
+})
+
+app.listen(port,function(){
+    console.log('Sever running on port 3000');
+},);
+
+```
+
+
 
 ### Git / Version Control:
 <hr>
