@@ -757,7 +757,23 @@ app.listen(port,function(){
 },);
 
 ```
+Two apps cannot access the same port. So only one process can be active on only port. The issue with the express or to say it ain't recognize the body. request body so need to used the 3rd party module
+body-parser.
 
+npm i body-parser
+```
+const app=express();
+const bodyParser=require("body-parser"):
+
+//syntax to use it
+app.use(bodyParser.json())
+
+app.get('/', (req,res)=>{
+   console.log(req.body);
+})
+```
+
+So not if you hit the port, it'll show you the request body. 
 
 
 ### Git / Version Control:
