@@ -779,7 +779,85 @@ So not if you hit the port, it'll show you the request body.
 
 Middlewares:
 
-Prechecks are required when someone anonymous hit your server, The authentication is required withought that you are not that secure so through the middleware you can authorise the user first.
+Prechecks are required when someone anonymous hit your server, The authentication is required withought that you are not that secure so through the middleware you can authorise the user first. So user can pass the creds through the query params, request body or the headers. We can write the logic in middlewere.
+
+```
+(With No MiddlewareS)
+
+const express=require(express);
+
+const app=express();
+
+const db={};
+
+app.get('/',function(req, res){
+
+    //writing the whole logic here only (no middleware)
+    //assuming user is passing username and pass in query params
+    const uName=req.query.username;
+    const pass=req.query.password;
+
+    if(db[uName]==undefined ||  (db[uName]!=undefined && db[uName]!=pass)){
+        res.status(403).json({
+            msg:"User ain't found"
+        });
+        // here directly we return if user ain't found with valid response and the code
+        return;
+    }
+
+    //rest of your logic to do the things once user is authenticated.
+    
+})
+
+
+```
+With the middlewares: (Moving code to saparate functions to Stay on DRY principle)
+
+```
+const express=require('express');
+
+const app=express();
+
+const db={};
+
+//inside app.get we can give the order of execution of the middlewares. here usernamevalidation will run first then the callbackfunction.
+//app.get take range of callback functions, at ;ast the control reached to last callback.
+//next() is just a iterator to call next callback function
+
+app.get('/', usernamevalidation, function(req, res){
+    res.statusCode=200;
+    res.json({'msg':'Successfully created user and authenticated'});
+})
+
+function usernamevalidation(req, res,next){
+
+    const uName=req.query.username;
+    const pass=req.query.password;
+    if(db[uName]==undefined){
+        //create user:
+        db[uName]=pass;
+        console.log(db);
+        res.status(200).json({'msg':'user created successfully'});
+        return;
+    }
+    if((db[uName]!=undefined && db[uName]!=pass)){
+        res.status(403).json({
+            msg:"User ain't found"
+        });
+
+        return;
+    }
+
+    //it will execute the next middleware
+    next(); 
+}
+
+const PORT=3000;
+app.listen(PORT,function(){
+    console.log('Server activated');
+});
+
+```
 
 
 
