@@ -862,6 +862,38 @@ app.listen(PORT,function(){
 
 ```
 
+next() function will be accepted a callback to the middleware function with request and response, but the next() will be called once we passed the criteria or in real world we can say authentication then we can exexute the next middleware or callback. this implementation follows the DRY principle. (DO not repeat).
+
+what is app.use(express.json())
+
+--> use mean this middleware goin to get called every where.
+
+define a middleware, if i do know our middleware is goin to get called every where in every route. Then just """use""" it.
+for example:
+
+```
+const express=require('express');
+
+const app=express();
+
+const db={};
+
+let numberofReq=0;
+function threshold(req,res,next){
+    numberofReq++;
+    next();
+}
+
+app.use(threshold);
+```
+
+so now any route under this app.use(threshhold) have threshhold as a middleware. but there in middleware you have to call next() in order to hand over the control to next middleware which is part of the route. 
+why body aint directly get accessed by req.body??? becuase body can be any format json, text , html so you have to parse it first inorder to use it. 
+
+**Input validations in request Body:**
+
+
+
 
 
 
