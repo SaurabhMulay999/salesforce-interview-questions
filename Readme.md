@@ -777,6 +777,9 @@ So not if you hit the port, it'll show you the request body.
 
 #### basics of Express:
 
+Middlewares:
+
+Prechecks are required when someone anonymous hit your server, The authentication is required withought that you are not that secure so through the middleware you can authorise the user first.
 
 
 
