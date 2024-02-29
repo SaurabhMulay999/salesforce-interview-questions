@@ -820,8 +820,11 @@ const app=express();
 
 const db={};
 
-//inside app.get we can give the order of execution of the middlewares. here usernamevalidation will run first then the callbackfunction.
-//app.get take range of callback functions, at ;ast the control reached to last callback.
+//inside app.get we can give the order of execution of the middlewares. here usernamevalidation
+ will run first then the callbackfunction.
+
+//app.get take range of callback functions, at last the control reached to last callback.
+
 //next() is just a iterator to call next callback function
 
 app.get('/', usernamevalidation, function(req, res){
