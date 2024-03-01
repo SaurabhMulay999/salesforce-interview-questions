@@ -949,11 +949,44 @@ app.listen(PORT,function(){
     console.log('Server activated');
 });
 
-
-
 ```
 
+ZOD is used to validate the input in runtime. Checkout the zod's documentation. below example if we have to validate the input Username suppose we expect username as in numbers only so we enforce
+it using zod and parseSafe method simply check if the input from user is number or not , if not then it'll set the response (variable defined in code :see below) .success to false else true. and as per the success variable you can tell the enduser that the input he has provided is not the correct type.
 
+Example:
+
+```
+const express=require('express');
+const app=express();
+const z=require('zod');
+const schema=z.number();
+
+app.get('/', function(req, res){
+    const uname=req.query.username;
+    const response=schema.safeParse(uname);
+    if(!response.success){
+        return InputInvalid(res);
+    }
+    res.send({response});
+})
+
+function InputInvalid(res){
+    res.send({'msg':'input is invalid'})
+}
+
+```
+you have to define a schema of how your input from user look a like. Scehma for username and password.
+
+```
+const z=require('zod');
+
+const schema=z.object({
+    email:z.string().email(),
+    password:z.string().min(10)
+})
+
+```
 
 
 
