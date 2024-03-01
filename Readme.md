@@ -890,8 +890,68 @@ app.use(threshold);
 so now any route under this app.use(threshhold) have threshhold as a middleware. but there in middleware you have to call next() in order to hand over the control to next middleware which is part of the route. 
 why body aint directly get accessed by req.body??? becuase body can be any format json, text , html so you have to parse it first inorder to use it. 
 
-**Input validations in request Body:**
+**Input validations in request Body & Catching errors globally: **
 
+--> **Global Error catch:**
+
+if there is the error at any route you can use app.use at last of the routes so that if any error hit any route globally it'll shows the error response, the function will accept error as an argument also.
+and work same as middleware.
+```
+const express=require('express');
+
+const app=express();
+
+const db={};
+
+let numberofReq=0;
+function threshold(req,res,next){
+    numberofReq++;
+    console.log(numberofReq);
+    next();
+}
+
+app.use(threshold);
+
+app.get('/', usernamevalidation, function(req, res){
+    res.statusCode=200;
+    res.json({'msg':'Successfully created user and authenticated'});
+})
+
+function usernamevalidation(req, res,next){
+    const uName=req.query.username;
+    const pass=req.query.password;
+    console.log(nulls.keys)
+    if(db[uName]==undefined){
+        db[uName]=pass;
+        console.log(db);
+        res.status(200).json({'msg':'user created successfully'});
+        return;
+    }
+    if((db[uName]!=undefined && db[uName]!=pass)){
+        res.status(403).json({
+            msg:"User ain't found"
+        });
+
+        return;
+    }
+    next(); 
+}
+
+//it'll catch the error for global usecase it'll run for every route at last
+
+app.use(function(err,req,res,next){
+    console.log('Error');
+    res.json({'Msg':'Error'})
+})
+
+const PORT=3000;
+app.listen(PORT,function(){
+    console.log('Server activated');
+});
+
+
+
+```
 
 
 
