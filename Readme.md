@@ -988,6 +988,13 @@ const schema=z.object({
 
 ```
 
+### Authentications:
+<br>
+
+you dont always expect user to provide the username and password, suppose you logged in on linkdn it won't ask you the username/email and password every time. So it it very numb way to asked user the username and pass. 
+the better way is to provide a token to a user and ask the user to send back the token in all future requests and if the user has logged out then remove the assigned token from or revoke the token assigned to user from you db or backend.
+
+First time when your are login or user is login he'll provide the username and password, respond to that server will return a Token (After validating the user). Now we'll store it in storage (browser storage) [local storage]. Now every request onwards the user is sending user will send the token along , so it won't check the username and pass it'll just check the token everytime. Storing email and password in local storage is fucking bad way!!!! 
 
 
 ### Git / Version Control:
