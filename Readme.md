@@ -1119,6 +1119,31 @@ app.listen(PORT,function(){
 })
 ```
 
+here now if u hit the server with valid data as follows: First hit to create a new user:
+
+```js
+//copy paste directly in browser
+http://localhost:3000/users?username=%22saurabh%22&password=%22Pass%22
+```
+
+then Try to auth with username and password on auth route: (It is a post request either use postman or fetch is fine)
+
+```js
+const d=fetch('http://localhost:3000/auth?username=%22Saurabh%22&password=%22Pass%22',{method:'POST'});
+```
+Now you'll get a Json web token, You need to store it in local storage if you are implementing the frontend and in further every request you need to have to pass the auth token rather than sending an email and password. not hit the get request again and pass the authorizationtoken.
+
+```js
+const d = fetch('http://localhost:3000/users?username=%22Saurabh%22&password=%22Pass%22', {
+  method: 'GET',
+  headers: {
+    'authorizationtoken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlwiU2F1cmFiaFwiIiwiaWF0IjoxNzA5Mzg1OTQ3fQ.oJJtCpjSPWf9Egba38c21aZUT4H4P6dPuly1WLipwZ0'
+  }
+}).then((res)=>console.log(res));
+```
+
+and now jwt.verify method will verify it with (with combination of jwt token and Hashed password from database). Here we have not passing hashed password but we have passed the Secret, which usually not store like how we have stored in the code. 
+
 
 
 ### Git / Version Control:
