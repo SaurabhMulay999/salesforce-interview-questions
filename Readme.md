@@ -996,6 +996,34 @@ the better way is to provide a token to a user and ask the user to send back the
 
 First time when your are login or user is login he'll provide the username and password, respond to that server will return a Token (After validating the user). Now we'll store it in storage (browser storage) [local storage]. Now every request onwards the user is sending user will send the token along , so it won't check the username and pass it'll just check the token everytime. Storing email and password in local storage is fucking bad way!!!! 
 
+Basic authentication: we want to restrict the api for the set of users or only allow to hit if user is authenticated.
+Hashing is important over here to hash users username + password in an anonymous auth code. becuase if user is loggin in with username and password, the backend will store the password somewhere in database. But it's always risky to store the passsword in plain. So it get hashed. So directly it ain't store, Why to hash the passwords:" Security purpose "  and also maybe the multiple users have same password So hashing helps. And the server or db owner ain't able to check the passwords of the users. and they are not able to decrypt it also. Hashing is one way and encryption is two way, you can decrypt the encoded data with key or security token.
+
+**JSON web Tokens:** 
+
+1. JSON: It take some json input and give you some structured or long string, (A formatted string) It differs from hasing and encryption.
+2. Token: and it takes the input and gives you a Token.
+
+   JWT: About jwt if you provide an input it gives you an output (string) and who ever has that output string can able to see what is an input (This is kind of weird: it ain't hashed or protected). It just convert complex objects in a long string. and anyone has that long string can able to decode that object. For example on any website if you open a n/w tab (Already logged in) and checked headers of your api request. It'll show authorization "Bearer" <TOken>. That token is actually JWT. If I copy that jwt token and visit any client that convert jwt token to valid objects, it'll convert your token to show you payload or your data. (Email). JWT token has 3 sections or parts, Overall token comprises Header, payload, Signature.
+   Suppose you password has hashed and put into the db and  your information has already there in term of the jwt token, the jwt token + password has parsed into a function again to verify your identity. JWT.verify. So in case of GPT take an example:
+   Suppose you have provided an input json data:
+
+   { 
+      email:"sarah@kc.com",       ====>( JWT Encoded )
+      pass:"ede@123"              ====>(             )
+   }
+
+   Out of json data it'll generate the Jwt token, but it ain't everything. suppose you hit a server with some payload or request, It'll bring back your hashed password from the database. and it'll parse both jwt token and hashed password in JWT.verify() function (or abstract code) and it'll allow only if that matches. or verified.
+
+  ( JWT(Token)                 )
+  ( &&                         )    ======> JWT.verify()  ====> Allowed if verified.
+  ( Hashed password (From DB)  )
+
+  From verify they may extract out our orignal info and matched any email assocaited with password (But not sure if they are doing the same or not) to just verify that it's you only that hiting the server.
+  
+  
+
+
 
 ### Git / Version Control:
 <hr>
