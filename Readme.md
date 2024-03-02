@@ -122,7 +122,7 @@ Who sees what in SF....!!!!!!!!!
   Select Id, Name, Amount From Opportunity Order by Amount DESC LIMIT 1 OFFSET k
   ````
   3.Example with TypeOf and When/Then clause.
-  ```
+  ```sql
    SELECT 
     TYPEOF What
         WHEN Account THEN Phone
@@ -139,7 +139,7 @@ Who sees what in SF....!!!!!!!!!
   ```
 4. GROUP by ROllUP:
     
-```` 
+```` sql
 SELECT LeadSource, COUNT(Name) cnt FROM Lead GROUP BY ROLLUP(LeadSource)
 
 Returned Aggregated results include an extra row with a null value for LeadSource that gives a grand total for all the groupings. Since there is only one 
@@ -147,7 +147,7 @@ rollup field, there are no other subtotals.
 
 `````
 5.Filtering soql queries With SECURITY_ENFORCED (Must asked Interview Question)
-```
+``` js
  [Saleforce docs said] Use the WITH SECURITY_ENFORCED clause to enable field- and object-level security permissions checking for SOQL SELECT queries in Apex code, including subqueries and cross-object relationships.
 Apex generally runs in system context; that is, the current user's permissions and field-level security aren’t taken into account during code execution. Sharing rules, however, are not always bypassed: the class must be declared with the without sharing keyword in order to ensure that sharing rules are not enforced.
 
@@ -172,7 +172,7 @@ Decorators:
 The public properties are decorated using @api and they are also reactive, when the value of property changes it results redering component and invoking rendercallback() hook. Though they are reactive but Js playes very important role here,
 
 consider below scenarios::
-```
+```js
 '===' operator in js compare data types as well as the values, it also called strict equality operator.
 
 '1'==='1' ==>true
@@ -204,7 +204,7 @@ Note when u'r using @track for objects:
 If a object's property contains an object, to track changes on the object's properties, annotate the property with @track. 
 
 example:
-```
+```js
 @track const obj={
  @track prop:{
   X:10;
@@ -217,7 +217,7 @@ Note while using @track :; dding a new property to obj or a change doesn’t tri
 example:
 
 it's just js habits to declare he variables with var and let but in classes you don't have to do that.
-````
+````js
 @track const obj={val1:"saurabh"}
 obj.val1="sarah" //will trigger the rendering
 
@@ -230,7 +230,7 @@ so again they fucked up over here, Likw kindoff forgot to handle the edge cases 
 [[To rerender your component when adding a new property, assign the object to a new object with both values.]]
 
 like:
-```
+```js
 @track obj={val1:"saurabh"}
 
 obj={
@@ -247,7 +247,7 @@ But story of @track ain't over...They again fuked up with reactivity, LWC won;t 
 so they again suggested in the case of dates:
 
 reassign he new date to that reactive property to make it reactive...
-```
+```js
 like below code they have cloned the date , modified it and assiged it back to reactive property
 updateDate() {
   const cloned = new Date(this.x.getTime());
@@ -290,7 +290,7 @@ errorCallback(): If an error occurs during rendering, this hook is called. It’
 
 **1.Parent to child:**
 
-````
+````js
 just create a public property using @api; in a child component
 
 @api prop;
@@ -311,7 +311,7 @@ phenomeno also called as lifting the state up.
 how to acheive::
 
 1.either u can pass data on click of some action from child.
-````
+````js
 child:
 <button onclick={click handler}></button>
 
@@ -355,7 +355,7 @@ When you have to divide the code in different threads then use future Methods. W
 
 Future methods are used to run processes on saparate thread, at the later time **when system resources are available.** future method runs when system resources are available so to explain with example.We have setup objects and non setup objects.example: setup objects are like 'User', 'Profile', 'Permission sets' and non setup are comman objects like 'account', 'contacts' etc. **So salesforce says you cannot handle both setup and non setup objects in single or same transaction.** if you have tried inserting user record and account record in same transaction, **You'll get Mixed DML exception.** So solution is to use Future Method,Run both insert operations on saparate threads to avoid Mixed DML operation.
 
-```
+```js
 Code:
 
 global class Pokemon{
@@ -393,7 +393,7 @@ On point no. 6::: It may or may not. but it won't guarante that it will be usefu
 
 5.[IMP] The maximum Number of future method invocations per 24 hrs period is 250,000 or Number of user license* 200. This limit is for your entire org and is shared with all asynchronus Apex calls like batch apex, queueable apex, schedule apex and future method.All the work after limit breach will get rolled back or simple salesforce won't be doing that. If u want to increase the limit then Pay for more user license.
 
-````
+````js
 Example of future method:
 
 public class pokemon{
@@ -432,7 +432,7 @@ So now just to avoid mixedDMLException we are running both insert operations on 
 2. When u submit your job call system.enqueueJob method. the method returns the id of asyncapex job record. You can use that ID to identify your job progress.
 3. Chaining jobs is possible. You can start another job from the current running job, so sequential processing is possible. 
 
-````
+````js
 Example:
 
 public class AccountUpdate implements Queueable{
@@ -485,7 +485,7 @@ when there are millions of records the queueable apex helps.
 
 **Example**:
 
-```
+```js
 global class UpdateAcc implements Database.Batchable<sObject>{
   
   global Database.QueryLocator;
@@ -510,7 +510,7 @@ global class UpdateAcc implements Database.Batchable<sObject>{
 In batch class we have to implement the interface Database.Bachable.
 
 To run the above methods or class:
-```
+```js
 UpdateAcc acc=new UpdateAcc();
 Id jobId=Database.executeBatch(acc);
 //pass the instance of class in executebatch
@@ -523,7 +523,7 @@ If in scenario, wanted to reduce batch size that can be acheivable by:
 => Example, suppose you have 2 records : one has only 3 fields filled in (minimum data) and second record has upto 50 fields filled in.
 Now in the memory the second instance or record would weigh higer than the first one. So it is not recommanded but a good practice to reduce the batch size when you have weighted data or records, or we can say heavy records.
 
-```
+```js
 UpdateAcc uac=new UpdateAcc();
 Id jobId=Database.executeBatch(uac,100);
 
@@ -550,7 +550,7 @@ Heap Size: Normal Context:6Mb, Batch or async Context: 12Mb
 5. You can only have 100 scheduled Apex jobs at one time.
 
 Example: Code
-```
+```js
 global class Reminder implements Schedulable{
   
   global void execute(SchedulableContext st){
@@ -588,7 +588,7 @@ Apex Jobs ==> It helps you to monitor the job.
 10. JSONException : When there are error while parsing a JSON string this exception thrown.
     
 
-````
+````js
 //DMLEXception
 Account a=new Account();
 insert a;  //will throw DMLException. (You're trying to insert account with no mandatory field filled in)
@@ -651,7 +651,7 @@ global: Visible in any Salesforce org, including external systems making RESTful
 
 Consume an API::
 
-```
+```js
 //blob: binary large Object data type.
 
 //RestContext has two props 'request' and 'response';
@@ -688,7 +688,7 @@ Considering data formatting,
 The syntax of JSON was inspired by the JavaScript Object Literal notation, but there are differences between them.
 
 For example, in JSON all keys must be quoted, while in object literals this is not necessary:
-```
+```js
 // JSON:
 { "foo": "bar" }
 
@@ -719,7 +719,7 @@ Js can be used with backends. we use its runtime Example Node, browsers, Bun (Wr
 Http Server: 
 Https primarily a protocol define how machines will goin to interact with each other. Http server exposes the service to the world. Like it accepts input from the user and after some checks it'll respond or send the response to the client. 
 
-```
+```js
 function init(input:string){
     return response;
 }
@@ -742,7 +742,7 @@ Why do we need status codes and the headers if we have response body?? Because h
 So google is just a domain Name behind that every domain or DN has Assigned to an IP. try **ping google.com** and you'll get and IP. behind the scene DNS do it for you , 
 
 To create an Http server:
-```
+```js
 const express=require('express');
 const port=3000;
 
@@ -761,7 +761,7 @@ Two apps cannot access the same port. So only one process can be active on only 
 body-parser.
 
 npm i body-parser
-```
+```js
 const app=express();
 const bodyParser=require("body-parser"):
 
@@ -781,7 +781,7 @@ Middlewares:
 
 Prechecks are required when someone anonymous hit your server, The authentication is required withought that you are not that secure so through the middleware you can authorise the user first. So user can pass the creds through the query params, request body or the headers. We can write the logic in middlewere.
 
-```
+```js
 (With No MiddlewareS)
 
 const express=require(express);
@@ -813,7 +813,7 @@ app.get('/',function(req, res){
 ```
 With the middlewares: (Moving code to saparate functions to Stay on DRY principle)
 
-```
+```js
 const express=require('express');
 
 const app=express();
@@ -871,7 +871,7 @@ what is app.use(express.json())
 define a middleware, if i do know our middleware is goin to get called every where in every route. Then just """use""" it.
 for example:
 
-```
+```js
 const express=require('express');
 
 const app=express();
@@ -896,7 +896,7 @@ why body aint directly get accessed by req.body??? becuase body can be any forma
 
 if there is the error at any route you can use app.use at last of the routes so that if any error hit any route globally it'll shows the error response, the function will accept error as an argument also.
 and work same as middleware.
-```
+```js
 const express=require('express');
 
 const app=express();
@@ -956,7 +956,7 @@ it using zod and parseSafe method simply check if the input from user is number 
 
 Example:
 
-```
+```js
 const express=require('express');
 const app=express();
 const z=require('zod');
@@ -978,7 +978,7 @@ function InputInvalid(res){
 ```
 you have to define a schema of how your input from user look a like. Scehma for username and password.
 
-```
+```js
 const z=require('zod');
 
 const schema=z.object({
@@ -1127,11 +1127,11 @@ app.listen(PORT,function(){
 Don't expect these questions in Interviews but learning perspective or to do open source contribution learning git is important.
 
 To Initialise the git repo:
-```
+```js
 git init 
 ```
 git status is used to check file status:
-```
+```js
 git status
 
 No commits yet
@@ -1158,14 +1158,14 @@ But Git won't be goin to track every single file, you need to mention which file
 Files in the staging area will be going to tell you what are the Files which are going to be part of your next version. This stagged area is place where git knows what changes will be done from files last version to the next version. So git suggests using git add to add files to stage area. So whichever version of a file you create, you going to add the files using git add.
 
 Try:
-````
+````js
 git add README.md
 
 ````
 and hit git status again:
 it'll show up a message,
 
-```
+```js
 Changes to be committed:
      Use git rm --cached <file> to unstaged (So in my understanding, this cmd will put file again from staging area to working)
      new File: README.md
@@ -1375,7 +1375,7 @@ Let's play with TS:
 3. create a file: touch index.ts
 4. write a code now. 
 
-```
+```js
 index.ts
 
 let num: number=10;
@@ -1388,13 +1388,13 @@ Usually, browsers or Node don't know Typescript. So Typescript always compiles d
 
 TypeScript Compiler: tsc is the compiler used to convert Typescript to JavaScript. 
 
-```
+```js
 node index.ts
 ```
 
 It'll throw error: So first run to compile
 
-```
+```js
 tsc -b
 
 //first it'll throw the error as the above code:
@@ -1418,7 +1418,7 @@ node index.js
 
 To deal with Functions:
 
-```
+```js
 Types: String, boolean, number, null, undefined
 
 
@@ -1442,7 +1442,7 @@ function (name:any){} or function(name:string){}
 ```
 
 Code: to add two Numbers:
-```
+```ts
 let n:number=2;
 let m:number=4;
 
@@ -1459,7 +1459,7 @@ But functions can infer the types, So it will be optional to write the return ty
 
 Example:
 
-````
+````js
 function fun(fn){
     setTimeOut(()=>{fn();},1000);
 }
@@ -1470,7 +1470,7 @@ So here what will be the type of function that we have passed as a parameter?
 it's a function definition.
 like!¡¡
 
-```
+```js
 function fun(fn:()=>void){
     setTimeout(()=>fn(),1000);
 }
@@ -1485,7 +1485,7 @@ In the above example, the function fn passed as a parameter and type we have men
 same we can have for the sum function: which accepts 2 param and returns a number.
 for example:
 
-```
+```js
 function fun(sum:(a:number, b:number )=>number){
     setTimeout(()=>sum(2,100),1000);
 }
@@ -1507,7 +1507,7 @@ TS Config File::
 As we know Js is not forward compatible, like you cannot run the code that you have written now in latest version in the old browsers. Because those browser versions ain't support that.
 So at some point, we may have a requirement where the browser is quite old and needs to run the old js, So ts target can define the ECMAScript target like telling the compiler "Hey compiler this is what I have written in a typescript file now please transpile it down with a version of ECMA2016 or else." So anyway you're writing the code in the new/latest version of JS but the babel/ts internally traspile it down.
 
-```
+```js
 tsconfig.js
 {
 "target": "es5",
@@ -1520,7 +1520,7 @@ tsconfig.js
 **More on rootDir and outDir:**
 Currently both files, .ts file, and .js file (which has been generated by tsc -b) resides in the same folder. It can be annoying if we have n number of components. So to specify where to store .ts file we use rootDir. and usually we create folder **Build** or **dist** to store the files which are generated by transpiler. (.js files)
 
-```
+```js
 {
 
 "target":"es5"
@@ -1544,7 +1544,7 @@ To assign the types to an Object then we use interfaces.
 
 Without an interface the program could look like this::
 
-```
+```js
 const product={
 name:'mobile',
 cost:12441,
@@ -1565,7 +1565,7 @@ console.log(fun(product));
 Now here every time in the functions like fun we have to mention the definition of the product object: to overcome this issue or to impose reusability we use interfaces:
 
 Using interface Product we can mention the defination of product object is like Product interface:
-```
+```js
 interface Product{
     name: string,
     cost: number,
@@ -1593,7 +1593,7 @@ function fun(product:Product):void | string{
 console.log(fun(product));
 ```
 Optional parameters in an interface can be defined with the '?' operator:
-```
+```js
 //here edible is the optional prop.
 
 interface Product{
@@ -1609,7 +1609,7 @@ interface Product{
 Interfaces can be implemented by a class.
 
 Example:
-```
+```js
 interface Product{
     name: string,
     cost: number,
@@ -1647,7 +1647,7 @@ So types come into the picture. but interfaces can be implemented with classes b
 Similar to Interfaces types can be used to aggregate the data together.
 
 To define a type:(kind of same as interface)But types can't be used to implement by classes.
-```
+```js
 type product={
 name: string,
 cost: number,
@@ -1658,7 +1658,7 @@ cost: number,
 
  UNION:
 
-```
+```js
 //Type can be either of 2 types either string or number
 
 type Snumber= string | number;
@@ -1678,7 +1678,7 @@ if you want to create a type that has every property of multiple types/interface
 
 example:
 
-```
+```js
 type product={
     name: string,
     cost: number
@@ -1707,7 +1707,7 @@ What is diff between the type and interfaces??? In above article we have covered
 
 arrays in js can hold different data types. So to define a type we use <type>[];
 Only type can do this::
-````
+````js
 type NumberArray=number[];
 function getElementatI(arr:NumberArray){}
 OR
@@ -1717,7 +1717,7 @@ function getElementatI(arr:number[]){}
 **Problem**: Create an array of Students: with Students is an object with properties name and marks and filter down the students with marks less than 50.
 Solution:
 
-```
+```js
 interface Students{
     name: string,
     mark: number,
@@ -1750,7 +1750,7 @@ function filter(arr:Students[]):Students[]{
 console.log(filter(arr));
 ```
 An array with multiple data types can called a tuple in TS, It ain't the same implementation as Python.
-```
+```js
 function fun():[number,string,boolean]{
     return [1, 'Stre', true];
 }
@@ -1763,7 +1763,7 @@ a way to present a set of constant values. which can be represented as numbers o
 
 why do we need Enum:
 
-```
+```js
 //suppose a function does move you're Chessboard queen
 
 function moveDirection(direction){
@@ -1778,14 +1778,14 @@ moveDirection('saurabh');
 
 another best way to resolve this issue is with types:
 
-```
+```js
 type direction=" UP" | "DOWN" | "Diagonal";
 ```
 so now with types we can enforce these only set of values to the function parameter.
 
 How to use Enums:
 
-```
+```js
 enum Dir{
       Up,
       Diagonal,
@@ -1809,7 +1809,7 @@ Suppose you don't know the array data type and you have to return values from th
 
 this issue can be solve with below approch: But what is the issue with that approch???
 
-```
+```js
 type arrayInput= string | number | boolean;
 
 function print(array:arrayInput[]):arrayInput{
@@ -1821,7 +1821,7 @@ console.log(v);  //Will print sarah
 ```
 
 For now the return type is string, Now try using string related methods on it.
-```
+```js
 type arrayInput= string | number | boolean;
 
 function print(array:arrayInput[]):arrayInput{
@@ -1833,7 +1833,7 @@ console.log(v.charAt(0));  //COMPILE TIME ERROR: That the charAt can't be used o
 ```
 So rather than the tuple you can have type as either string[] or the number[] so type arrayInput makes no sense.
 
-```
+```js
 function print(array: number[] | string[] ):arrayInput{
     return array[0];
 }
@@ -1845,7 +1845,7 @@ T => can infer the type correctly (you'll understand if familier with Generics i
 
 Example:
 
-```
+```js
 //args can be auth token or password or otp
 
 function authenticate<T>(arg:T):T{
