@@ -1020,7 +1020,15 @@ Hashing is important over here to hash users username + password in an anonymous
   ( Hashed password (From DB)  )
 
   From verify they may extract out our orignal info and matched any email assocaited with password (But not sure if they are doing the same or not) to just verify that it's you only that hiting the server.
-  
+  Before we have discussed to store the tokens in browser storage so every time user don't have to login. So in the local storage of browser it store it. Local storage ain't removed or clear if you closed the browser, or you restarted the machine also, it'll be stored always there. while session storages are temporary. 
+
+  Build simple authenticaltion:
+
+  **POST request** to Sign in route: With user input {Username:"", Password:""} return a user Json web token (No password included : JWT ain't contain the users password,Store it else where or in db) with the username encrypted. 
+  **GET request:** return a number of items in menu if and only if the current user is signed in.(Token which provided to user is correct)
+
+If any case user has logged out from the app then from local storage revoke that token but storig that token and revoking can be handle by frontend. 
+
   
 
 
