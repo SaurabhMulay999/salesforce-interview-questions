@@ -1144,6 +1144,15 @@ const d = fetch('http://localhost:3000/users?username=%22Saurabh%22&password=%22
 
 and now jwt.verify method will verify it with (with combination of jwt token and Hashed password from database). Here we have not passing hashed password but we have passed the Secret, which usually not store like how we have stored in the code. 
 
+#### Salesforce and Offered abstract Integration.
+
+<hr>
+Get to know about authentication && Authorization:
+Read :  <a href="https://stackoverflow.com/questions/33702826/oauth-authorization-vs-authentication#:~:text=OAuth%20is%20a%20specification%20for,and%20obtain%20an%20authorization%20grant.">Stack Overflow</a>
+
+
+
+
 
 
 ### Git / Version Control:
