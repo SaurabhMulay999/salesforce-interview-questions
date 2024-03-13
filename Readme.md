@@ -1237,6 +1237,26 @@ Using SAMLn artifact, the IDP generates two messages 1.SAML artifact 2.SAML asse
 
 Implement it so you'll get to know more on it!!!!
 
+There are some limitations to the SAML so Oauth came into the picture.
+
+###OAuth 2.0 & OpenId:: 
+<br>
+Oauth often associated with authentication or sometime authorization, but the thing to remember actually Oauth called Open authorization and why to associate it with authentication??? because authentication is the first step!!!!! But it really not for authentication as well for Authorization but it actually design to get delegated Authority. For example you have 2 apps. app1 and app2 (which might be integrated) and you want to share data in between app1 and app2. Your data is protected so you have to provide credentials to app2 into app1. app1 now has access to all your data and you wont able to decide which data required to share. and providing username and passwords to the apps is not a good idea because they are 3rd party systems.
+now with the Oauth when you tell app1 that you want to integrate with app2, it trigger Oauth flow. You as user logged in app2 and within app2 approve integration so app1 never see your credential and as a user you are allow to manage the access the app2 is requesting. you can revoke the access by removing the access token. and you can change password without breaking integrations. 
+
+**Parties**:
+0.Resource owner
+
+1.client
+
+2.Authorization server
+
+3.Resource Server  (Authorization server and resource server can be shared or completely saparate)
+
+
+
+
+
 
 
 ### Git / Version Control:
