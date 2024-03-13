@@ -1150,8 +1150,42 @@ and now jwt.verify method will verify it with (with combination of jwt token and
 Get to know about authentication && Authorization:
 Read :  <a href="https://stackoverflow.com/questions/33702826/oauth-authorization-vs-authentication#:~:text=OAuth%20is%20a%20specification%20for,and%20obtain%20an%20authorization%20grant.">Stack Overflow</a>
 
+**Open Authorization: (Oauth)**
+<br>
+
+As with node we have already learn that user don't need to pass the username and password again and again to authenticate himself, the server will provide a token to him so with token user can authenticate, and jwt comprises users information that can be easily decrypted but server db's has the users passwords in hashed format so it can be passed along with the jwt token to authenticate the user every time user opens up the website or ip.
+The end goal of O auth is to obtain an access token that can be used to access the protected resources without ever passing the username and passwords to the other systems. The formost example is the mobile phone application, suppose you are using an image edit application , now that application need a access to your image gallary or drive pictures, So you simply allow it but it backed with Oauth. It may first tell to to login with credentials then the server simply provides you an access tokens so now on the image edit application will send an access token to the image server to access the protected resources, in this specific case Images. 
+
+**Authentication and Authorization:**
+<br>
+
+if people are trying to access systems then just think of SAML but if systems trying to accesss the system in OAuth. Authentication is the first process for an authorization, a user/system needs to be authenticated first.
+
+Example: Workbench trying to access salesforce data.
+
+**Resource owner :** It may be you who owns the data.
+
+**Client:** client is workbench who try accessing your data.
+
+**Resource Server:** It is salesforce it has protected resources, that can be accessed by client with valid permissions (auth).
+
+**Authorization server:**  this server authenticate the resource owner, issue the access tokens etc.
+
+So oAuth is not created to authorise a person but it meant for a service to authorise another service. We'll look into this in more details in oauth flow.
 
 
+**Authentication Methods:**
+<br>
+
+1. **Form Base Login: (Cookies base auth)**
+
+==> It is simple! first user have to provide username and password. when we hit the sserver with username and password then the server checks or authenticate the user and if authentication is valid then it generate a session using users information and unique session id and set the cookie header with session id value. the server sent cookie has been saved by frontend engineers and after every subsequent request brower send that cookie to the server to identify the users eliminating usage of username and password. and it'll maintain the users sesssion, so everytime you login to github, browser saves that session so every time you don;t have to login.
+
+2. SAML:|| **Security assertion markup language** ||(Single sign-on accross sites):
+
+==> SAML use to achieve the single sign on (SSO). 
+
+**SAML (Basics)**:
 
 
 
