@@ -1196,6 +1196,7 @@ The IDP knows about the user/client and their attributes like username, email, f
 <br>
 
 ![image](https://github.com/SaurabhMulay999/salesforce-interview-questions/assets/90036775/4b5e8fe5-c734-42c3-b5bb-36c6e8116852)
+
 <br>
 
 **How user initiate the auth flow:**
