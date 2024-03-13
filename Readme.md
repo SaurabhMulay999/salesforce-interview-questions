@@ -1193,9 +1193,9 @@ So oAuth is not created to authorise a person but it meant for a service to auth
 **SAML FLOW:: (in depth)**
 
 The IDP knows about the user/client and their attributes like username, email, firstname, lname or other information that is unique to the user. when IDP generates the saml Assertions then it populate that markup with the user identifier and send it to SP (Service provider) then the SP validate the assertion. But you can't send completely unprotected date or SAML. SO IDP must have sign the assertions before send it to sp, SP will have check the issuer of the assertion. Indirectly sp is validating the idp. (How??? Previously we know that there is trust relation betn them  :  may have been established by sharing certificates.) The SP read the user identifier in his db and try to map it. it may fails if user attribute not found. So the configurations are needed the rules are needed thats tells IDP what the SP needs to check the user in his db. It can be dont using SAML configs. and IDP agrees to match the SAML configs. if both SP and IDP has same SAML configarations then the user can be mapped easily or valiated easily in Service provider. and therby the sp allow the access to the user. The configurations can be done manually in xml metadata files. (IDP.xml and Sp.xml) and idp xml file and sp xml files can contain the settings and certificates (those are metadata files). Npw actually to build the trust IDP sent that xml metadata file to sp and vice versa. 
-<br>
 
-![image](https://github.com/SaurabhMulay999/salesforce-interview-questions/assets/90036775/4b5e8fe5-c734-42c3-b5bb-36c6e8116852)
+![image](https://github.com/SaurabhMulay999/salesforce-interview-questions/assets/90036775/52a470a1-64fb-480a-a883-6a8fb6fc99bd)
+
 
 <br>
 
