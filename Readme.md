@@ -1,4 +1,4 @@
-![image](https://github.com/SaurabhMulay999/salesforce-interview-questions/assets/90036775/fcd82617-dccb-47e6-89e5-33d75353d401)### Salesforce Security Model
+### Salesforce Security Model
 <hr>
 
 **Explain Salesforce Security Model: With Examples and Theory.**
