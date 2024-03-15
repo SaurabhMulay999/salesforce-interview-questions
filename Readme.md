@@ -1245,15 +1245,28 @@ Oauth often associated with authentication or sometime authorization, but the th
 now with the Oauth when you tell app1 that you want to integrate with app2, it trigger Oauth flow. You as user logged in app2 and within app2 approve integration so app1 never see your credential and as a user you are allow to manage the access the app2 is requesting. you can revoke the access by removing the access token. and you can change password without breaking integrations. 
 
 **Parties**:
-0.Resource owner
+0.Resource owner (user / person : YOU)
 
-1.client
+1.client  (client or the app which is requesting the resources on your behalf)
 
 2.Authorization server
 
 3.Resource Server  (Authorization server and resource server can be shared or completely saparate)
+   --> Resource server in case is salesforce which has the resources.
 
+When your are doing outbound integration: Named credentials helps.
 
+Inbound calls:: Salesforce supports below:::flows==>
+
+1. SAML bearer Assertion
+2. JWT bearer token
+3. Refresh token
+4. Web server authentication
+5. username-password
+6. user-agent
+7. device authentication
+8. asset token
+9. SAML assertions
 
 
 
