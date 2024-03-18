@@ -1268,7 +1268,10 @@ Inbound calls:: Salesforce supports below:::flows==>
 8. asset token
 9. SAML assertions
 
+Web server flow is quite secure.  Web server auth flow provide the acces token and refresh token.
 
+**Scneario:**
+A web app want to authenticate and authorise inbound in the salesforce. The web ap support both openID connect (Authentication protocol) and Oauth 2.0.
 
 
 
