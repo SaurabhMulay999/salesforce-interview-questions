@@ -1276,27 +1276,10 @@ JWT is (Json web tokens) (In node js section we have learnt about JWT's ).
 
 sometime Oauth used for the user authentication, (and it's never not the usecase). To deal with it and to provide the user authentication the OPEN ID CONNECT is created. (OIDC). It's standard added or layer added on top of Oauth 2.0. OIDC adds the ID TOKEN  on top it's JWT.it add user info endpoints.
 
-**OPENID CONNECT Flow::**
-
 <hr>
 
-
-
-
-
-
-
-**Parties**:
-0.Resource owner (user / person : YOU)
-
-1.client  (client or the app which is requesting the resources on your behalf)
-
-2.Authorization server (Generating the access tokens)
-
-3.Resource Server  (Authorization server and resource server can be shared or completely saparate)
-   --> Resource server in case is salesforce which has the resources.
-
-When your are doing outbound integration: Named credentials helps.
+### More highlights on Outh and how salesforce deals with:
+<hr>
 
 Inbound calls:: Salesforce supports below:::flows==>
 
