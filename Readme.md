@@ -1241,15 +1241,54 @@ There are some limitations to the SAML so Oauth came into the picture.
 
 ###OAuth 2.0 & OpenId:: 
 <br>
-Oauth often associated with authentication or sometime authorization, but the thing to remember actually Oauth called Open authorization and why to associate it with authentication??? because authentication is the first step!!!!! But it really not for authentication as well for Authorization but it actually design to get delegated Authority. For example you have 2 apps. app1 and app2 (which might be integrated) and you want to share data in between app1 and app2. Your data is protected so you have to provide credentials to app2 into app1. app1 now has access to all your data and you wont able to decide which data required to share. and providing username and passwords to the apps is not a good idea because they are 3rd party systems.
-now with the Oauth when you tell app1 that you want to integrate with app2, it trigger Oauth flow. You as user logged in app2 and within app2 approve integration so app1 never see your credential and as a user you are allow to manage the access the app2 is requesting. you can revoke the access by removing the access token. and you can change password without breaking integrations. 
+Oauth often associated with authentication or sometime authorization, but the thing to remember actually Oauth called Open authorization and why to associate it with authentication??? because authentication is the first step!!!!! But it really not for authentication as well for Authorization but it actually design to get delegated Authority. For example you have 2 apps. app1 and app2 (which might be integrated) and you want to share data in between app1 and app2. Your data is protected so sharng your have to provide credentials to app2 into app1. app1 now has access to all your data and you wont able to decide which data required to share. and providing username and passwords to the apps is not a good idea because they are 3rd party systems.
+now with the Oauth when you tell app1 that you want to integrate with app2, it trigger Oauth flow. You as user logged in app2 and within app2 approve integration so app1 never see your credential and as a user you are allow to manage the access the app2/app1 is requesting. you can revoke the access by removing the access token. and you can change password without breaking integrations.  
+
+So to conclude,Oauth allow you to grant authority to application so the application can act on your behalf. 
+**Example:**
+
+**Native Client To Server::**
+Suppose you installed an outlook, the backend is office 365 which host both authorization server and resource server. when you run outlook first time it ain't have the valid access token it must have to obtain one from authorization server. so user must have first authenticate in office 365, this step of authentication can be outside of oauth flow and can be handled by SAML. Now the authorization server generates two token, access token and refresh token. The both token send to the outlook (client) , now client store the access token and share it with subsequent request to servers. Client attach the access token when client hit the resource server indicating that he user has been authenticated and have access to the resources and with access token outlook can check users email, contacts etc. So with access token outlook can perform actions behalf of the user and user don't have to put the outlook 365's username as well passsword in outlook to authenticate. So here user has delegated the authority to the outlook client and the credentials are not stored in client storage (local or session). Admin can block the access by revoking the tokens. Access token can be valid upto an hour. and refresh token has much more ttl or time to live (almost upto 14 days or longer (maybe 90 days also)). When the access token expires the client uses refresh token to request new access token from authorizaion server.and as long as refresh token is alive we can get an access token from authorization server. many application allow user to determin ttl for refresh token.
+
+
+In server to server commmunication Oauth is to comman. Suppose App 1 is client and app2 host both authorization server and resource server. But before integration the admin of each app must talk to each other. So admin of app1 register his application in app2 providing Application name or indentifier and the callback URL (So the app2 can hit the app1 again with ack).In response to app1's request the app2 generates the client ID and Secret so in further callouts the app1 can use the client id and secret.  (It is kind of a username and password) client Id and secret can be generated automatically (config files). Now user can initiate the Oauth flow by adding integration betn. Resource owner /user (considerint user is on app1) getting redirected to app2 with client ID , redirect URI, Response Type (app1 callout to app2 with these valid information) as request to app2 from app1. The app1 in request must have send the scope of auth code. (Scope is like what level of acccess does app1 needs to the resurce owner data). Suppose scope set to profile/contact so we can consider the app1 requesting users profile and contacts. 
+
+
+Now the user is presented with the scope. and many time user can manage the level of access, suppose user allow read access to contacts and read write to profile. if user approves and give the consent the authorization code is generated by app2's authorization server and sent back to app1. app1 take authorization code and sent it back to the app2 again with the client Id and secret(Id and secret of app2 which already has shared in handshake) , and grant_types (with specify that app1 share the authorization code in exchange of access token).The app2 generates (authorization server generate) the access token  to app1. the access token is limited time to live and it is bearer in nature (Bearer mean: anyone with the token can access or use it ) for example: if you're logged in on chat gpt and open the inspect area  and find a auth token and it's bearer in nature then anyone with that token access chatgpt as you or as you requesting gpt. Afterward access tokens are used to  get shared by app1 to app2's resource server to get valid data. Why involving the sharing of authirization code first???? maybe for multiple security reasons? yes initial steps of the flow were done with help of user's browser (FRONT CHANNEL) or in can done at frontend. And any malicious code and pick up these information. if we send acess token to frontend and if access token picked up by someone and token type is bearer then that person can access your data. So because of security reason the back Channel or on backend we share the access token usually. Exchange of access token is done with back channel or on backend/ server to server. client serect can only be known to app1 and app2. (None other) so authorization code itself without clientid and secret make no sense. **This is Authorization code grant FLOW of Oauth**. it makes use of frontchannel and backchannel.
+
+
+there are some other flows also like 1.Implicit flow: which uses front channel communication.  then  2.Hybrid flow , 3.Resource owner password flow, 4.Client Credentials, 5.Device Authorization flow.
+
+
+Token formats is not specified in the Oauth docs. so we have below codes:
+
+1. Ws-security token
+2. SAML tokens
+3. JWT token
+4. Legacy token
+5. Home Grown
+6. custom Tokens
+
+JWT is (Json web tokens) (In node js section we have learnt about JWT's ).
+
+**OPEN ID CONNECT::**
+
+sometime Oauth used for the user authentication, (and it's never not the usecase). To deal with it and to provide the user authentication the OPEN ID CONNECT is created. (OIDC). It's standard added or layer added on top of Oauth 2.0. OIDC adds the ID TOKEN  on top it's JWT.it add user info endpoints.
+
+**OPENID CONNECT Flow::**
+
+
+
+
+
+
 
 **Parties**:
 0.Resource owner (user / person : YOU)
 
 1.client  (client or the app which is requesting the resources on your behalf)
 
-2.Authorization server
+2.Authorization server (Generating the access tokens)
 
 3.Resource Server  (Authorization server and resource server can be shared or completely saparate)
    --> Resource server in case is salesforce which has the resources.
@@ -1270,8 +1309,10 @@ Inbound calls:: Salesforce supports below:::flows==>
 
 Web server flow is quite secure.  Web server auth flow provide the acces token and refresh token.
 
+
+
 **Scneario:**
-A web app want to authenticate and authorise inbound in the salesforce. The web ap support both openID connect (Authentication protocol) and Oauth 2.0.
+A web app want to authenticate and authorise inbound in the salesforce. The web app support both openID connect (Authentication protocol) and Oauth 2.0.
 
 
 
