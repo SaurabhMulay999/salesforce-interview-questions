@@ -1005,7 +1005,7 @@ Hashing is important over here to hash users username + password in an anonymous
 2. Token: and it takes the input and gives you a Token.
 
    JWT: About jwt if you provide an input it gives you an output (string) and who ever has that output string can able to see what is an input (This is kind of weird: it ain't hashed or protected). It just convert complex objects in a long string. and anyone has that long string can able to decode that object. For example on any website if you open a n/w tab (Already logged in) and checked headers of your api request. It'll show authorization "Bearer" <TOken>. That token is actually JWT. If I copy that jwt token and visit any client that convert jwt token to valid objects, it'll convert your token to show you payload or your data. (Email). JWT token has 3 sections or parts, Overall token comprises Header, payload, Signature.
-   Suppose you password has hashed and put into the db and  your information has already there in term of the jwt token, the jwt token + password has parsed into a function again to verify your identity. JWT.verify. So in case of GPT take an example:
+   Suppose your password has hashed and put into the db and  your information has already there in term of the jwt token, the jwt token + password has parsed into a function again to verify your identity. JWT.verify. So in case of GPT take an example:
    Suppose you have provided an input json data:
 
    { 
@@ -1295,10 +1295,92 @@ Inbound calls:: Salesforce supports below:::flows==>
 
 Web server flow is quite secure.  Web server auth flow provide the acces token and refresh token.
 
+**Connected APP**:: 
+
+Its is a framework that enables external system to integrate with salesfoce using API and standard protocols like SAML, Oauth and OPENID connect.it used to authenticatem authorise and provide sso for external applications.
+**To create connected app in salesforce:**
+Quick find ==> APP Manager ==> New ==> Connected APP
+
+Now here you have to fill some information like callback URI (Enable Oauth settings), Scope (we have seen what is scope already in oauth section), Salesforce redirect you after the succesfull authentication to the callback URL.(Multiple callback url supports (just add line break in betn two)). in the scopes if you have mentioned full access then you'll only get the access token. (Perform request on behalf at any time setting must have added to trigger refresh token+access token flow). after creation you'll get consumer secret and key which you have to share with the platform which making callouts to salesforce. 
+Salesforce CLI and workbench is also kind of a connected app. 
+
+**Webserver Flow:**
+
+first the external system will sent an post request to salesforce for a authorization code. salesforce issue and authorization code and afterward client again hit salesforce with client id , secret and require information in request header with authorization code to get in exchange a Access code, 
+URL should be::(to hit salesforce) ""https://login.salesforce.com/services/oauth2/authorize?client_id= & redirect_uri=__same as mentioned in connected app__&response_type=code""
+```js
+https://login.salesforce.com/services/oauth2/authorize?client_id= & redirect_uri=__same as mentioned in connected app__&response_type=code
+
+```
+Like wise the end user can hit the salesfoce for the authorization code. Now once you authenticated the salesforce will redirect you to callback url with the code as a query param. like ""htttps://callbackurl? code="". this code is nothing but authorization code. and it was url encoded. 
+
+Now to request access token: we know to establish a connection we have to share this authorization code again to the salesforce or server.Now hit a post request to
+```js
+ENDPOINTS:  https://login.salesforce.com/services/oauth2/token
+```
+
+this endpoints specifically salesforce api to just validate the request. as post request from client comprises:
+
+```js
+request headers:
+
+Content-type: application/x-www-form-urlencoded
+grant_type=authorization_code
+code={present in callback url (decoded format) }
+client_id={client id of server }
+client_secret={client secret of server}
+redirect_uri="url which you have mentioned while creation of the connected app"
+
+```
+decode the encoded code from the callback uri and then only pass in request header.afterward if success. you'll get an access token. as well if configured a refresh token also. token type is bearer in this case.
+
+**JWT bearer token flow**::
+
+In case of the server to server communication jwt bearer token flow is used. no client interaction. and refresh token will not be issued in this flow. we alredy have learn about JWT's before in node section. We need certificate to sign in JWT token flow. In SAML sso we have seen that the servers needs to establish a trust relations so they just exchange the certificates to validate. (Don't have any idea why this flow uses certificates: check on the internet)
+
+to generate certificate you need some external dependancies. open ssl usually used. some commands listed will create an certificate.
+
+```js
+(this command will create a pass key)
+
+openssl genrsa -des3 -passout pass:somePassword -out server.pass.key 2048
+
+(to generate server key)
+
+openssl rsa -passsin pas:somepassword -in server.pass.key -out sercer.key
+
+(to generate certificate)
+
+openssl req -new -key server.key -out server.csr
+
+(to generate singed certificate)
+
+openssl x509 -req -sha256 -days 365 -in server.csr -signedkey server.key -out server.crt
+
+```
+Now after successful certificate creation. upload it in the connected app. click the section checkbox "use digital signature" and upload the certificate. Now generate a jwt token. 
+
+````js
+//payload of jwt contains
+
+issuer: (it is a client id)
+subject: (username (whoever is the user))
+audience: "salesforce url (domain)"
+expiration: (mostly use currenttimestamp)
+{
+"iss":"",
+"sub":"",
+"aud":"",
+"exp"=""
+}
+
+````
+(imp)
+**in the signature section of jwt token, you have to pass the certificate.and the private key (which is the server key we have generated).**
+
+now hit the salesforce with post request to check. you'll directly get an access token after. (checkout what should be passed in the request header).
 
 
-**Scneario:**
-A web app want to authenticate and authorise inbound in the salesforce. The web app support both openID connect (Authentication protocol) and Oauth 2.0.
 
 
 
